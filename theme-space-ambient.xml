@@ -1,0 +1,1536 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX'/>
+
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:view.title.escaped/></title>
+  
+  <b:include data='blog' name='all-head-content'/>
+  <link expr:href='data:blog.url.canonical' rel='canonical'/>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <meta content='Mayank Raj, AI, Cybersecurity, IIT Patna, Developer, Portfolio' name='keywords'/>
+  <meta content='index, follow' name='robots'/>
+  
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <meta expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title' property='og:title'/>
+  <meta expr:content='data:blog.url.canonical' property='og:url'/>
+  <meta content='website' property='og:type'/>
+  <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  <b:if cond='data:blog.postImageUrl'>
+    <meta expr:content='data:blog.postImageUrl' property='og:image'/>
+  </b:if>
+
+  <meta content='summary_large_image' name='twitter:card'/>
+  <meta expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title' name='twitter:title'/>
+  <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+  <b:if cond='data:blog.postImageUrl'>
+    <meta expr:content='data:blog.postImageUrl' name='twitter:image'/>
+  </b:if>
+
+  <link href='https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap' rel='stylesheet'/>
+  
+  <b:skin><![CDATA[
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --border: rgba(120,120,200,0.15);
+    --border2: rgba(120,120,200,0.3);
+    --accent: #6c63ff;
+    --accent2: #a78bfa;
+    --accent3: #38bdf8;
+    --text: #e8e8f0;
+    --text2: #9090b0;
+    --text3: #5050708;
+    --card: #13131e;
+    --glow: rgba(108,99,255,0.15);
+    --shadow-sm: 0 4px 15px rgba(0,0,0,0.2);
+    --shadow-md: 0 10px 30px rgba(0,0,0,0.3);
+    --shadow-glow: 0 8px 25px rgba(108,99,255,0.35);
+  }
+  [data-theme="light"] {
+    --bg: #f5f5fa;
+    --bg2: #ebebf5;
+    --bg3: #e0e0ee;
+    --border: rgba(60,60,140,0.12);
+    --border2: rgba(60,60,140,0.25);
+    --accent: #5b52e8;
+    --accent2: #7c6fd9;
+    --accent3: #0284c7;
+    --text: #1a1a2e;
+    --text2: #44446a;
+    --card: #ffffff;
+    --glow: rgba(91,82,232,0.08);
+    --shadow-sm: 0 4px 15px rgba(0,0,0,0.05);
+    --shadow-md: 0 12px 40px rgba(0,0,0,0.08);
+    --shadow-glow: 0 8px 25px rgba(91,82,232,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+    overflow-x: hidden;
+  }
+  
+  /* ── PROGRESS BAR ── */
+  #reading-progress {
+    position: fixed; top: 0; left: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    z-index: 99999; width: 0%; transition: width 0.15s ease-out;
+  }
+
+  /* ── TRUE LIVE WALLPAPER BACKGROUND ── */
+  .animated-bg {
+    position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+    background: linear-gradient(135deg, var(--bg), var(--bg2), var(--bg), var(--bg3));
+    background-size: 400% 400%;
+    animation: ambientBackground 15s ease infinite;
+  }
+  @keyframes ambientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .bg-orb {
+    position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.15;
+    animation: floatOrb 20s ease-in-out infinite alternate;
+  }
+  .bg-orb-1 { width: 50vw; height: 50vw; background: var(--accent); top: -20%; left: -10%; }
+  .bg-orb-2 { width: 40vw; height: 40vw; background: var(--accent3); bottom: -10%; right: -10%; animation-delay: -5s; animation-direction: alternate-reverse; }
+  .bg-orb-3 { width: 30vw; height: 30vw; background: var(--accent2); top: 40%; left: 30%; animation-delay: -10s; }
+  
+  @keyframes floatOrb {
+    0% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(50px, -50px) scale(1.1); }
+    100% { transform: translate(-30px, 80px) scale(0.9); }
+  }
+
+  /* Scrolling grid */
+  .bg-grid {
+    position: absolute; inset: -50%;
+    background-image: 
+      linear-gradient(rgba(108,99,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,99,255,0.05) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridScroll 20s linear infinite;
+  }
+  [data-theme="light"] .bg-grid {
+    background-image: 
+      linear-gradient(rgba(91,82,232,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,82,232,0.04) 1px, transparent 1px);
+  }
+  @keyframes gridScroll {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(60px) rotate(0deg); }
+  }
+
+  /* Falling Data Streams / Cyber Lines */
+  .data-stream {
+    position: absolute; width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent3), transparent);
+    animation: dataFall linear infinite;
+  }
+  .ds-1 { left: 15%; height: 25vh; animation-duration: 7s; animation-delay: 1s; }
+  .ds-2 { left: 35%; height: 15vh; animation-duration: 10s; animation-delay: 4s; }
+  .ds-3 { left: 55%; height: 30vh; animation-duration: 6s; animation-delay: 0s; }
+  .ds-4 { left: 75%; height: 20vh; animation-duration: 8s; animation-delay: 3s; }
+  .ds-5 { left: 90%; height: 35vh; animation-duration: 12s; animation-delay: 2s; }
+
+  @keyframes dataFall {
+    0% { top: -40vh; opacity: 0; }
+    20% { opacity: 0.4; }
+    80% { opacity: 0.4; }
+    100% { top: 110vh; opacity: 0; }
+  }
+
+  /* ── SCROLL REVEAL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.8, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+
+  /* ── INTRO ANIMATION ── */
+  #intro-overlay {
+    position: fixed; inset: 0; z-index: 9999; background: #0a0a0f;
+    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+    animation: overlayOut 0.6s ease 2.2s forwards;
+  }
+  .intro-name {
+    font-size: clamp(2rem, 6vw, 4rem); font-weight: 700; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #6c63ff, #38bdf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    opacity: 0; transform: translateY(20px); animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+  .intro-sub {
+    font-size: 1rem; color: #9090b0; letter-spacing: 0.15em; text-transform: uppercase;
+    opacity: 0; animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+  .intro-bar {
+    width: 200px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden;
+    opacity: 0; animation: fadeUp 0.4s ease 1s forwards;
+  }
+  .intro-bar-fill {
+    height: 100%; background: linear-gradient(90deg, #6c63ff, #38bdf8); width: 0%;
+    animation: barFill 1.0s ease 1.1s forwards;
+  }
+  @keyframes overlayOut { to { opacity: 0; pointer-events: none; } }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+  @keyframes barFill { to { width: 100%; } }
+  
+  /* ── NAV ── */
+  nav { position: relative; z-index: 100; background: transparent; border-bottom: 0.5px solid var(--border); transition: background 0.4s; }
+  .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1164px; padding: 1.5rem 2rem; margin: 0 auto; }
+  .nav-logo-section { display: flex; align-items: center; margin: 0; padding: 0; }
+  .nav-logo-section .widget { margin: 0; }
+  .nav-logo { display: inline-flex; align-items: center; font-size: 1.25rem; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -0.01em; font-family: 'JetBrains Mono', monospace; }
+  
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links-wrapper .widget { margin: 0; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; margin: 0; padding: 0; }
+  .nav-links a { color: var(--text2); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; letter-spacing: 0.02em; }
+  .nav-links a:hover { color: var(--accent); }
+  
+  /* ── DROPDOWN MENU ── */
+  .dropdown { position: relative; display: inline-block; }
+  .dropdown .dropbtn { cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .dropdown-content { display: none; position: absolute; background-color: var(--bg); min-width: 200px; box-shadow: var(--shadow-md); border: 1px solid var(--border); border-radius: 0.75rem; top: 100%; left: -1rem; z-index: 101; padding: 0.5rem 0; overflow: hidden; }
+  .dropdown-content a { color: var(--text); padding: 0.75rem 1.5rem; text-decoration: none; display: block; font-size: 0.85rem; transition: background 0.2s, color 0.2s; }
+  .dropdown-content a:hover { background-color: var(--bg3); color: var(--accent); }
+  .dropdown:hover .dropdown-content { display: block; animation: dropFade 0.2s ease forwards; }
+  @keyframes dropFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  
+  /* Mobile Hamburger Icon */
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+  .hamburger svg { width: 28px; height: 28px; fill: var(--text); }
+
+  /* ── SEARCH BAR ── */
+  .search-form { display: flex; align-items: center; position: relative; }
+  .search-input { background: var(--bg3); border: 0.5px solid var(--border2); color: var(--text); padding: 0.5rem 1rem 0.5rem 2.2rem; border-radius: 2rem; font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; width: 160px; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .search-input::placeholder { color: var(--text2); }
+  .search-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); width: 200px; }
+  .search-btn { position: absolute; left: 10px; background: none; border: none; padding: 0; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .search-btn svg { width: 16px; height: 16px; fill: var(--text2); transition: fill 0.2s; }
+  .search-input:focus + .search-btn svg, .search-btn:hover svg { fill: var(--accent); }
+
+  /* ── DARK MODE TOGGLE ── */
+  #theme-toggle { background: var(--bg3); border: 0.5px solid var(--border2); border-radius: 2rem; width: 52px; height: 28px; cursor: pointer; position: relative; transition: background 0.3s; flex-shrink: 0; }
+  #theme-toggle::before { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); transition: transform 0.3s, background 0.3s; }
+  [data-theme="light"] #theme-toggle::before { transform: translateX(24px); background: var(--accent); }
+  .toggle-icons { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; font-size: 11px; pointer-events: none; }
+
+  /* ── BUTTONS ── */
+  .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 0.8rem 1.8rem; background: linear-gradient(135deg, var(--accent), var(--accent3)); color: #fff !important; text-decoration: none; border-radius: 0.75rem; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-glow); }
+  .btn-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 0.8rem 1.8rem; background: transparent; color: var(--text); border: 1px solid var(--border2); border-radius: 0.75rem; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; }
+  .btn-secondary:hover { background: var(--bg3); border-color: var(--accent); color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+
+  /* ── HERO ── */
+  .hero { min-height: auto; padding: 2.5rem 2rem 2rem; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .hero-text-wrapper { width: 100%; max-width: 800px; text-align: center; margin-bottom: 3rem; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(108,99,255,0.1); border: 0.5px solid rgba(108,99,255,0.3); border-radius: 2rem; padding: 6px 14px; font-size: 0.8rem; font-weight: 500; color: var(--accent2); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1.5rem; }
+  .hero-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  .hero-title { font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
+  .hero-title span { background: linear-gradient(135deg, var(--accent), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero-desc { font-size: 1.1rem; line-height: 1.7; color: var(--text2); margin: 0 auto 2.5rem auto; max-width: 600px; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+  /* ── GITHUB & YOUTUBE GRID ── */
+  .stats-yt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; width: 100%; max-width: 1100px; margin-top: 3rem; }
+  .github-banner { background: linear-gradient(135deg, rgba(120,120,200,0.08), rgba(120,120,200,0.02)); border: 0.5px solid rgba(120,120,200,0.2); border-radius: 1.5rem; padding: 3rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.4s; height: 100%; }
+  .github-banner:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(120,120,200,0.1); border-color: rgba(120,120,200,0.4); }
+  .github-icon { width: 64px; height: 64px; fill: var(--text); margin-bottom: -0.5rem; }
+  .btn-github { display: inline-flex; align-items: center; gap: 8px; padding: 1rem 2rem; background: var(--text); color: var(--bg) !important; text-decoration: none; border-radius: 1rem; font-weight: 600; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s, background 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(255,255,255,0.1); }
+  .btn-github:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,255,255,0.2); background: var(--text); opacity: 0.9; }
+  [data-theme="light"] .btn-github { background: #24292e; color: #fff !important; box-shadow: 0 4px 15px rgba(36,41,46,0.2); }
+  [data-theme="light"] .btn-github:hover { background: #000; box-shadow: 0 8px 25px rgba(36,41,46,0.3); opacity: 1; }
+
+  .yt-banner { background: linear-gradient(135deg, rgba(255,0,0,0.08), rgba(200,0,0,0.02)); border: 0.5px solid rgba(255,0,0,0.2); border-radius: 1.5rem; padding: 3rem 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s; height: 100%; }
+  .yt-banner:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.4); }
+  .yt-icon { width: 64px; height: 64px; fill: #ff0000; margin-bottom: -0.5rem; }
+  .btn-youtube { display: inline-flex; align-items: center; gap: 8px; padding: 1rem 2rem; background: #ff0000; color: #fff !important; text-decoration: none; border-radius: 1rem; font-weight: 600; font-size: 1rem; transition: transform 0.3s, box-shadow 0.3s, background 0.2s; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(255,0,0,0.2); }
+  .btn-youtube:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255,0,0,0.4); background: #e60000; }
+
+  /* ── SECTIONS ── */
+  section.standard-section { padding: 4rem 2rem; max-width: calc(1100px + 4rem); margin: 0 auto; width: 100%; }
+  .section-label { display: inline-flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .section-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+  .section-title { font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 700; letter-spacing: -0.025em; margin-bottom: 1rem; line-height: 1.1; }
+  .section-desc { font-size: 1rem; color: var(--text2); max-width: 540px; line-height: 1.7; margin-bottom: 3rem; }
+  .divider { border: none; height: 0.5px; background: var(--border); max-width: 1100px; margin: 0 auto; width: calc(100% - 4rem); }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .about-text { color: var(--text2); line-height: 1.8; font-size: 1rem; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1rem; }
+  .highlight-item { background: var(--card); border: 0.5px solid var(--border); border-radius: 0.875rem; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 0.875rem; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+  .highlight-item:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .highlight-icon { width: 40px; height: 40px; border-radius: 0.625rem; background: rgba(108,99,255,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .highlight-info strong { font-size: 0.9rem; font-weight: 600; display: block; margin-bottom: 2px; }
+  .highlight-info span { font-size: 0.8rem; color: var(--text2); }
+  
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 0.5px; background: var(--border); }
+  .timeline-item { display: flex; gap: 2rem; padding: 0 0 2.5rem 0; position: relative; }
+  .timeline-dot { width: 40px; height: 40px; border-radius: 50%; background: var(--card); border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; position: relative; z-index: 1; transition: border-color 0.2s; }
+  .timeline-item:hover .timeline-dot { border-color: var(--accent); box-shadow: 0 0 0 4px var(--glow); }
+  .timeline-body { background: var(--card); border: 0.5px solid var(--border); border-radius: 0.875rem; padding: 1.5rem; flex: 1; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+  .timeline-item:hover .timeline-body { border-color: var(--accent); transform: translateX(6px); box-shadow: var(--shadow-sm); }
+  .timeline-period { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-bottom: 4px; }
+  .timeline-role { font-size: 1.05rem; font-weight: 600; margin-bottom: 2px; }
+  .timeline-org { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.75rem; }
+  .timeline-points { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .timeline-points li { font-size: 0.9rem; color: var(--text2); line-height: 1.6; padding-left: 1.5rem; position: relative; margin-bottom: 0.5rem; }
+  .timeline-points li::before { content: '\25B8'; position: absolute; left: 0; color: var(--accent); font-size: 1rem; top: 1px; }
+
+  /* ── PROJECTS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .project-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s; position: relative; overflow: hidden; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent3)); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
+  .project-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-date { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-bottom: 1rem; }
+  .project-icon { width: 48px; height: 48px; border-radius: 0.75rem; background: rgba(108,99,255,0.1); border: 0.5px solid rgba(108,99,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
+  .project-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .project-desc { font-size: 0.9rem; color: var(--text2); line-height: 1.65; }
+
+  /* ── BLOG GRID AND POST STYLES ── */
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .blog-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; transition: transform 0.4s, box-shadow 0.4s, border-color 0.4s; }
+  .blog-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: var(--shadow-md); }
+  .blog-date { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent2); margin-bottom: 0.75rem; }
+  .blog-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.4; }
+  .blog-title a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+  .blog-title a:hover { color: var(--accent); }
+  .blog-snippet { font-size: 0.9rem; color: var(--text2); line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
+  .read-more { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 600; color: var(--accent); text-decoration: none; align-self: flex-start; transition: transform 0.2s; }
+  .read-more:hover { transform: translateX(6px); }
+  
+  /* ── FULL POST VIEW (UPGRADED LAYOUT) ── */
+  .post-container {
+    background: var(--card); border: 1px solid var(--border); border-radius: 1.5rem;
+    padding: 4rem; width: 95%; max-width: 1000px; /* Reduced width for perfect reading tracking */
+    margin: 2rem auto 4rem; box-shadow: var(--shadow-md); overflow: hidden;
+  }
+  @media (max-width: 768px) { .post-container { padding: 2.5rem 1.5rem; width: 95%; border-radius: 1rem; } }
+  
+  .post-header { text-align: center; margin-bottom: 3.5rem; border-bottom: 1px dashed var(--border); padding-bottom: 3rem; }
+  .post-header h1 {
+    font-size: clamp(2.2rem, 5vw, 3.5rem); margin: 1rem 0; line-height: 1.2; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent), var(--accent3)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .post-meta-tags {
+    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1rem;
+    color: var(--text2); font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; font-weight: 500; margin-top: 1.5rem;
+  }
+  .post-tag { background: rgba(108,99,255,0.1); border: 1px solid rgba(108,99,255,0.2); padding: 4px 14px; border-radius: 2rem; color: var(--accent2); }
+  
+  /* ── SINGLE HERO IMAGE (100% WIDTH, LANDSCAPE) ── */
+  .post-hero-image {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Perfect landscape format */
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-md);
+    margin: 0 auto 3.5rem auto; /* Creates space between the image and the start of the text */
+    background: var(--bg2);
+  }
+  .post-hero-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    transition: transform 0.4s ease;
+  }
+  .post-hero-image:hover img {
+    transform: scale(1.03);
+  }
+  @media (max-width: 768px) {
+    .post-hero-image { aspect-ratio: 16 / 9; margin-bottom: 2rem; border-radius: 1rem; }
+  }
+
+  /* ── STRICT SINGLE-IMAGE ENFORCEMENT ── */
+  /* This completely hides Blogger's original inline images to ensure ONLY the hero image displays */
+  .post-body .separator, 
+  .post-body img { 
+    display: none !important; 
+  }
+
+  /* ── POST BODY TYPOGRAPHY ── */
+  .post-body { 
+    font-size: 1.15rem; line-height: 1.85; color: var(--text); letter-spacing: 0.01em; 
+    max-width: 800px; margin: 0 auto; /* Keeps text in a perfectly readable center column */
+  }
+  .post-body h2, .post-body h3, .post-body h4 { color: var(--text); margin: 2.5rem 0 1.2rem; font-weight: 700; line-height: 1.3; }
+  .post-body p { margin-bottom: 1.5rem; color: var(--text2); text-align: left; }
+  .post-body a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent); transition: all 0.2s; }
+  .post-body a:hover { color: var(--accent3); border-bottom-style: solid; background: rgba(56,189,248,0.1); }
+  .post-body ul, .post-body ol { margin-bottom: 1.5rem; padding-left: 1.5rem; color: var(--text2); }
+  .post-body li { margin-bottom: 0.5rem; }
+  
+  /* Cool Blockquotes */
+  .post-body blockquote {
+    border-left: 4px solid var(--accent);
+    background: linear-gradient(90deg, var(--bg3), transparent);
+    padding: 1.5rem 2rem; margin: 2.5rem 0; font-style: italic; color: var(--text); border-radius: 0 1rem 1rem 0;
+  }
+  
+  /* Syntax Highlighting for code blocks */
+  .post-body pre {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: 1rem;
+    padding: 1.5rem; overflow-x: auto; margin: 2.5rem 0; box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+  }
+  .post-body code { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent3); }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2rem; }
+  .skill-category { background: var(--card); border: 0.5px solid var(--border); border-radius: 1rem; padding: 1.5rem; transition: transform 0.3s, box-shadow 0.3s; }
+  .skill-category:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); border-color: var(--accent); }
+  .skill-cat-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent2); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+  .skill-cat-title::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { padding: 5px 12px; background: var(--bg3); border: 0.5px solid var(--border); border-radius: 0.5rem; font-size: 0.82rem; color: var(--text2); font-weight: 500; transition: background 0.2s, color 0.2s, border-color 0.2s; cursor: default; }
+  .skill-tag:hover { background: rgba(108,99,255,0.1); border-color: rgba(108,99,255,0.3); color: var(--accent2); }
+
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .cert-card { background: var(--card); border: 0.5px solid var(--border); border-radius: 0.875rem; padding: 1.25rem; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .cert-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--shadow-sm); }
+  .cert-issuer { font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .cert-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  .cert-date { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--text2); }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { background: var(--card); border: 0.5px solid var(--border); border-radius: 0.875rem; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--text); transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+  .contact-item:hover { border-color: var(--accent); transform: translateX(6px); color: var(--text); box-shadow: var(--shadow-sm); }
+  .contact-icon { width: 40px; height: 40px; background: rgba(108,99,255,0.1); border-radius: 0.625rem; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; color: var(--text2); margin-bottom: 2px; }
+  .contact-value { font-size: 0.9rem; font-weight: 500; }
+  .contact-card { background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(56,189,248,0.05)); border: 0.5px solid rgba(108,99,255,0.25); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; justify-content: center; gap: 1rem; transition: transform 0.4s, box-shadow 0.4s; }
+  .contact-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .contact-card h3 { font-size: 1.4rem; font-weight: 700; }
+  .contact-card p { font-size: 0.95rem; color: var(--text2); line-height: 1.7; }
+  
+  /* ── FOOTER ── */
+  .site-footer { border-top: 1px solid var(--border); background: var(--bg2); padding: 1.5rem 2rem; margin-top: 4rem; position: relative; z-index: 10; }
+  .footer-bottom { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { font-size: 0.85rem; color: var(--text2); margin: 0; }
+  .footer-credit { font-family: 'JetBrains Mono', monospace; color: var(--accent2); font-weight: 500; }
+  .footer-heart { color: #e879a0; margin: 0 2px; }
+  .footer-inline-links .widget { margin: 0; }
+  .inline-legal-links { display: flex; gap: 1.5rem; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .inline-legal-links a { color: var(--text2); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; font-weight: 500; }
+  .inline-legal-links a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE MOBILE VIEW ── */
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 2rem 2rem; }
+    .stats-yt-grid { grid-template-columns: 1fr; }
+    .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    
+    .hamburger { display: block; }
+    .nav-right {
+      display: none; position: absolute; top: 100%; left: 0; width: 100%;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      flex-direction: column; padding: 2rem; gap: 2rem; z-index: 100; box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    }
+    .nav-right.active { display: flex; }
+    .nav-links { flex-direction: column; width: 100%; gap: 1.5rem; }
+    
+    .search-form { margin: 0; width: 100%; order: -1; margin-bottom: 0.5rem; }
+    .search-input { width: 100%; }
+    .search-input:focus { width: 100%; }
+
+    .dropdown-content { position: static; box-shadow: none; border: none; border-left: 2px solid var(--accent); border-radius: 0; padding-left: 1rem; margin-top: 0.5rem; display: none; }
+    .dropdown:hover .dropdown-content { display: block; }
+    .footer-bottom { flex-direction: column; text-align: center; justify-content: center; gap: 1rem; }
+  }
+  
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+  ]]></b:skin>
+</head>
+<body>
+
+<div id='reading-progress'/>
+
+<div class='animated-bg'>
+  <div class='bg-orb bg-orb-1'/>
+  <div class='bg-orb bg-orb-2'/>
+  <div class='bg-orb bg-orb-3'/>
+  <div class='bg-grid'/>
+  
+  <div class='data-stream ds-1'/>
+  <div class='data-stream ds-2'/>
+  <div class='data-stream ds-3'/>
+  <div class='data-stream ds-4'/>
+  <div class='data-stream ds-5'/>
+</div>
+
+<b:if cond='data:view.isHomepage'>
+  <div id='intro-overlay'>
+    <div class='intro-name'>Badmosh Mamu</div>
+    <div class='intro-sub'>AI &amp; Cybersecurity &#183; IIT Patna</div>
+    <div class='intro-bar'><div class='intro-bar-fill'/></div>
+  </div>
+</b:if>
+
+<nav>
+  <div class='nav-container'>
+    <b:section class='nav-logo-section' id='nav-logo' maxwidgets='1' showaddelement='no'>
+      <b:widget id='HTML99' locked='false' title='Edit Logo' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<a class="nav-logo" href="/">&lt;MR /&gt;</a>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'><data:content/></b:includable>
+      </b:widget>
+    </b:section>
+    
+    <button aria-label='Menu' class='hamburger' onclick='toggleMenu()'>
+      <svg viewBox='0 0 24 24'><path d='M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z'/></svg>
+    </button>
+    
+    <div class='nav-right' id='nav-menu'>
+      <b:section class='nav-links-wrapper' id='nav-links-editable' maxwidgets='1' showaddelement='yes'>
+        <b:widget id='HTML25' locked='false' title='Edit Nav Links &amp;amp; Dropdown' type='HTML' version='2' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'><![CDATA[<ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#about">About</a></li>
+                <li><a href="/#projects">Projects</a></li>
+                <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">Pages ▾</a>
+                  <div class="dropdown-content">
+                    <a href="/p/about.html">About Me</a>
+                    <a href="/p/contact.html">Contact Us</a>
+                    <a href="/p/privacy-policy.html">Privacy Policy</a>
+                    <a href="/p/terms.html">Terms & Conditions</a>
+                  </div>
+                </li>
+              </ul>]]></b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'><data:content/></b:includable>
+        </b:widget>
+      </b:section>
+      
+      <form action='/search' class='search-form' method='get'>
+        <input class='search-input' name='q' placeholder='Search posts...' required='required' type='text'/>
+        <button aria-label='Search' class='search-btn' type='submit'>
+          <svg viewBox='0 0 24 24'><path d='M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/></svg>
+        </button>
+      </form>
+
+      <button aria-label='Toggle dark/light mode' id='theme-toggle' onclick='toggleTheme()'>
+        <div class='toggle-icons'><span>🌙</span><span>&#9728;&#65039;</span></div>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<b:if cond='data:view.isHomepage'>
+  
+  <b:section class='hero-section' id='hero-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML10' locked='false' title='Edit Hero Area' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<div class="hero-text-wrapper reveal">
+      <div class="hero-tag">
+        <div class="hero-dot"></div>
+        Available for Internships
+      </div>
+      <h1 class="hero-title">
+        Building Secure<br/>
+        <span>AI Systems</span><br/>
+        of Tomorrow
+      </h1>
+      <p class="hero-desc">
+        2nd year BS student at IIT Patna specializing in Artificial Intelligence & Cybersecurity. Passionate about decentralized systems, machine learning, and building things that matter.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#blog">Read My Blog →</a>
+        <a class="btn-secondary" href="#contact">Get in Touch</a>
+      </div>
+    </div>
+    
+    <br/><br/><br/>
+    
+    <div class="stats-yt-grid">
+      <div class="github-banner reveal delay-1">
+        <svg class="github-icon" viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></path></svg>
+        <div>
+          <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Explore My Code</h2>
+          <p style="color: var(--text2); max-width: 400px; margin: 0 auto; line-height: 1.6;">Check out my latest AI models, cybersecurity scripts, and open-source contributions.</p>
+        </div>
+        <a href="http://github.com/singhmaxank" target="_blank" class="btn-github">Follow @singhmaxank</a>
+      </div>
+
+      <div class="yt-banner reveal delay-2">
+        <svg class="yt-icon" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></path></svg>
+        <div>
+          <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem;">Join the Community</h2>
+          <p style="color: var(--text2); max-width: 400px; margin: 0 auto; line-height: 1.6;">Follow my journey on YouTube where I dive deep into AI developments and cybersecurity.</p>
+        </div>
+        <a href="https://www.youtube.com/@badmoshmamu" target="_blank" class="btn-youtube">Subscribe to @badmoshmamu</a>
+      </div>
+    </div>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'>
+        <div class='hero'><data:content/></div>
+      </b:includable>
+    </b:widget>
+  </b:section>
+
+  <hr class='divider reveal'/>
+
+  <b:section class='about-container' id='about-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML11' locked='false' title='Edit About' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="about" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">About Me</div>
+    <h2 class="section-title">Who I Am</h2>
+    <p class="section-desc">A builder, learner, and problem-solver at the intersection of AI and security.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal delay-1">
+      <p>I'm Mayank Raj, a second-year BS student at IIT Patna pursuing Artificial Intelligence & Cybersecurity — two fields I believe will define the next decade of technology. With a 9.53 CGPA, I've consistently pushed myself to go beyond the classroom.</p>
+      <p>Before IIT, I led a technical team in Nepal for two years, managed full project lifecycles, and contributed to community-building at Rotary's Interact Club. That hands-on experience taught me that the best technology is built for real people with real problems.</p>
+      <p>I also spent time as a Social Media Manager at Orgazz Enterprises, where I learned to communicate complex ideas visually — a skill that makes me a more well-rounded engineer.</p>
+    </div>
+    <div class="about-highlights reveal delay-2">
+      <div class="highlight-item"><div class="highlight-icon">🎓</div><div class="highlight-info"><strong>IIT Patna · 2025–2029</strong><span>BS in AI & Cybersecurity · CGPA 9.53/10</span></div></div>
+      <div class="highlight-item"><div class="highlight-icon">🔐</div><div class="highlight-info"><strong>Cybersecurity</strong><span>Deloitte Forage certified · Secure systems design</span></div></div>
+      <div class="highlight-item"><div class="highlight-icon">🤖</div><div class="highlight-info"><strong>AI & ML</strong><span>HCL GUVI certified · Satellite ML models</span></div></div>
+      <div class="highlight-item"><div class="highlight-icon">🌐</div><div class="highlight-info"><strong>Nepal + India</strong><span>Cross-cultural tech leadership background</span></div></div>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <hr class='divider reveal'/>
+
+  <b:section class='experience-container' id='experience-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML14' locked='false' title='Edit Experience' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="experience" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">Work History</div>
+    <h2 class="section-title">Experience</h2>
+    <p class="section-desc">From Nepal's startup scene to India's premier tech institute — a journey built on real work.</p>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal delay-1">
+      <div class="timeline-dot">🚀</div>
+      <div class="timeline-body">
+        <div class="timeline-period">Sep 2025 – Feb 2026</div>
+        <div class="timeline-role">Social Media Manager</div>
+        <div class="timeline-org">Orgazz Enterprises LLP · Noida, India</div>
+        <ul class="timeline-points">
+          <li>Led development of the company's e-commerce website and end-to-end graphic design system</li>
+          <li>Applied data-driven marketing insights to grow the startup's online presence from the ground up</li>
+          <li>Produced reels, stories, polls, and graphic content for multi-platform social media engagement</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal delay-2">
+      <div class="timeline-dot">⚡</div>
+      <div class="timeline-body">
+        <div class="timeline-period">Sep 2020 – Sep 2022</div>
+        <div class="timeline-role">Tech Team Lead</div>
+        <div class="timeline-org">The Gream Project · Nepal</div>
+        <ul class="timeline-points">
+          <li>Managed end-to-end project lifecycles, developing strong leadership and problem-solving skills</li>
+          <li>Directed the technical team to successful completion of multiple projects over two years</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal delay-3">
+      <div class="timeline-dot">🤝</div>
+      <div class="timeline-body">
+        <div class="timeline-period">Feb 2020 – Feb 2022</div>
+        <div class="timeline-role">Technical Team Member</div>
+        <div class="timeline-org">Interact — Rotary Sponsored Club · Nepal</div>
+        <ul class="timeline-points">
+          <li>Contributed to community event execution, improving local outreach and engagement</li>
+          <li>Provided technical support and collaborated within cross-functional team environments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <hr class='divider reveal'/>
+
+  <b:section class='projects-container' id='projects-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML15' locked='false' title='Edit Projects' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="projects" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">Academic Work</div>
+    <h2 class="section-title">Projects</h2>
+    <p class="section-desc">Real problems. Real solutions. Built to matter.</p>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card reveal delay-1">
+      <div class="project-date">May 2026 · BS Capstone, Semester 2</div>
+      <div class="project-icon">🔗</div>
+      <div class="project-name">Lifelong Medical Records Ledger (LMRL)</div>
+      <div class="project-desc">A decentralized health data framework built for India using secure ledger technology. Privacy-first and tamper-resistant.</div>
+    </div>
+    <div class="project-card reveal delay-2">
+      <div class="project-date">Dec 2025</div>
+      <div class="project-icon">🌍</div>
+      <div class="project-name">Illegal Logging Detection Model</div>
+      <div class="project-desc">An AI model that ingests satellite imagery and applies machine learning to identify unregulated logging practices.</div>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <hr class='divider reveal'/>
+
+  <b:section class='skills-container' id='skills-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML12' locked='false' title='Edit Skills' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="skills" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">Capabilities</div>
+    <h2 class="section-title">Skills & Tools</h2>
+    <p class="section-desc">A versatile stack — from building models to shipping product.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category reveal delay-1">
+      <div class="skill-cat-title">Languages & Web</div>
+      <div class="skill-tags"><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">SQL</span><span class="skill-tag">Front-End Dev</span></div>
+    </div>
+    <div class="skill-category reveal delay-2">
+      <div class="skill-cat-title">AI & Data</div>
+      <div class="skill-tags"><span class="skill-tag">Machine Learning</span><span class="skill-tag">Data Science</span><span class="skill-tag">Cybersecurity</span></div>
+    </div>
+    <div class="skill-category reveal delay-3">
+      <div class="skill-cat-title">Creative & Design</div>
+      <div class="skill-tags"><span class="skill-tag">Premiere Pro</span><span class="skill-tag">Photoshop</span><span class="skill-tag">UI/UX</span></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top: 4rem;">
+    <div class="section-label">Certifications</div>
+    <h3 style="font-size: 1.3rem; font-weight: 600; margin-bottom: 1.5rem;">Credentials</h3>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal delay-1"><div class="cert-issuer">Sololearn</div><div class="cert-name">Web Development</div><div class="cert-date">Aug 2019</div></div>
+    <div class="cert-card reveal delay-2"><div class="cert-issuer">Canva</div><div class="cert-name">Graphic Design Essentials</div><div class="cert-date">Oct 2025</div></div>
+    <div class="cert-card reveal delay-3"><div class="cert-issuer">HCL GUVI</div><div class="cert-name">Decode Data Science</div><div class="cert-date">Jan 2026</div></div>
+    <div class="cert-card reveal delay-1"><div class="cert-issuer">Deloitte</div><div class="cert-name">Cyber Job Simulation</div><div class="cert-date">June 2026</div></div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+</b:if>
+
+<hr class='divider reveal'/>
+
+<section class='standard-section' id='blog'>
+  <b:if cond='data:view.isHomepage'>
+    <div class='reveal'>
+      <div class='section-label'>Writing</div>
+      <h2 class='section-title'>Latest Posts</h2>
+      <p class='section-desc'>Thoughts, tutorials, and updates on what I&#39;m building.</p>
+    </div>
+  </b:if>
+  
+  <b:if cond='data:view.isSearch'>
+    <div class='reveal'>
+      <div class='section-label'>Search Results</div>
+      <h2 class='section-title'>Query: &quot;<data:view.search.query.escaped/>&quot;</h2>
+    </div>
+  </b:if>
+
+  <b:section class='main' id='main' name='Main Posts' showaddelement='yes'>
+    <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+        <b:widget-setting name='commentLabel'>Comments</b:widget-setting>
+        <b:widget-setting name='style.textcolor'>#ffffff</b:widget-setting>
+        <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+        <b:widget-setting name='authorLabel'>by</b:widget-setting>
+        <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+        <b:widget-setting name='style.urlcolor'>#ffffff</b:widget-setting>
+        <b:widget-setting name='showAuthor'>true</b:widget-setting>
+        <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+        <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+        <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+        <b:widget-setting name='timestampLabel'/>
+        <b:widget-setting name='reactionsLabel'/>
+        <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+        <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+        <b:widget-setting name='showLabels'>true</b:widget-setting>
+        <b:widget-setting name='showLocation'>false</b:widget-setting>
+        <b:widget-setting name='postLabelsLabel'>Tags:</b:widget-setting>
+        <b:widget-setting name='showTimestamp'>false</b:widget-setting>
+        <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+        <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+        <b:widget-setting name='style.bordercolor'>#ffffff</b:widget-setting>
+        <b:widget-setting name='showInlineAds'>true</b:widget-setting>
+        <b:widget-setting name='showReactions'>false</b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main' var='top'>
+        
+        <b:if cond='data:view.isMultipleItems'>
+          <b:if cond='data:posts.empty'>
+            <div class='reveal' style='padding: 4rem 0; text-align: center; color: var(--text2); font-size: 1.1rem;'>
+              No results found. Try searching for something else!
+            </div>
+          <b:else/>
+            <div class='blog-grid'>
+              <b:loop values='data:posts' var='post'>
+                <div class='blog-card reveal'>
+                  <div class='blog-date'><data:post.date/></div>
+                  <h3 class='blog-title'>
+                    <a expr:href='data:post.url'><data:post.title/></a>
+                  </h3>
+                  <div class='blog-snippet'>
+                    <b:eval expr='data:post.body snippet { length: 150, links: false, linebreaks: false }'/>
+                  </div>
+                  <a class='read-more' expr:href='data:post.url'>Read More &#8594;</a>
+                </div>
+              </b:loop>
+            </div>
+          </b:if>
+          <b:include name='nextprev'/>
+          
+        <b:else/>
+          <b:loop values='data:posts' var='post'>
+            <div class='post-container reveal'>
+              <div class='post-header'>
+                <div class='blog-date'><data:post.date/></div>
+                <h1><data:post.title/></h1>
+                <div class='post-meta-tags'>
+                  <b:if cond='data:post.labels'>
+                    <b:loop values='data:post.labels' var='label'>
+                      <span class='post-tag'>#<data:label.name/></span>
+                    </b:loop>
+                  </b:if>
+                  <span style='color: var(--accent);'>&#183;</span>
+                  <span>By <data:post.author.name/></span>
+                </div>
+              </div>
+              
+              <!-- &#9472;&#9472; DYNAMIC NATIVE HERO IMAGE (100% WIDTH LANDSCAPE) &#9472;&#9472; -->
+              <b:if cond='data:post.featuredImage'>
+                <div class='post-hero-image'>
+                  <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 1200, &quot;16:9&quot;)'/>
+                </div>
+              </b:if>
+
+              <div class='post-body'>
+                <data:post.body/>
+              </div>
+            </div>
+          </b:loop>
+        </b:if>
+      </b:includable>
+      <b:includable id='aboutPostAuthor'>
+  <div class='author-name'>
+    <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+      <span>
+        <data:post.author.name/>
+      </span>
+    </a>
+  </div>
+  <div>
+    <span class='author-desc'>
+      <data:post.author.aboutMe/>
+    </span>
+  </div>
+</b:includable>
+      <b:includable id='addComments'>
+  <a expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+    <b:message name='messages.postAComment'/>
+  </a>
+</b:includable>
+      <b:includable id='commentAuthorAvatar'>
+  <div class='avatar-image-container'>
+    <img class='author-avatar' expr:src='data:comment.authorAvatarSrc' height='35' width='35'/>
+  </div>
+</b:includable>
+      <b:includable id='commentDeleteIcon' var='comment'>
+  <span expr:class='&quot;item-control &quot; + data:comment.adminClass'>
+    <b:if cond='data:showCmtPopup'>
+      <div class='goog-toggle-button'>
+        <div class='goog-inline-block comment-action-icon'/>
+      </div>
+    <b:else/>
+      <a class='comment-delete' expr:href='data:comment.deleteUrl' expr:title='data:messages.deleteComment'>
+        <img src='https://resources.blogblog.com/img/icon_delete13.gif'/>
+      </a>
+    </b:if>
+  </span>
+</b:includable>
+      <b:includable id='commentForm' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+    <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+      <p><data:this.messages.blogComment/></p>
+    </b:if>
+    <b:include data='post' name='commentFormIframeSrc'/>
+    <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+      <b:includable id='commentFormIframeSrc' var='post'>
+  <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
+</b:includable>
+      <b:includable id='commentItem' var='comment'>
+  <div class='comment' expr:id='&quot;c&quot; + data:comment.id'>
+    <b:include cond='data:blog.enabledCommentProfileImages' name='commentAuthorAvatar'/>
+
+    <div class='comment-block'>
+      <div class='comment-author'>
+        <b:if cond='data:comment.authorUrl'>
+          <b:message name='messages.authorSaidWithLink'>
+            <b:param expr:value='data:comment.author' name='authorName'/>
+            <b:param expr:value='data:comment.authorUrl' name='authorUrl'/>
+          </b:message>
+        <b:else/>
+          <b:message name='messages.authorSaid'>
+            <b:param expr:value='data:comment.author' name='authorName'/>
+          </b:message>
+        </b:if>
+      </div>
+      <div expr:class='&quot;comment-body&quot; + (data:comment.isDeleted ? &quot; deleted&quot; : &quot;&quot;)'>
+        <data:comment.body/>
+      </div>
+      <div class='comment-footer'>
+        <span class='comment-timestamp'>
+          <a expr:href='data:comment.url' title='comment permalink'>
+            <data:comment.timestamp/>
+          </a>
+          <b:include data='comment' name='commentDeleteIcon'/>
+        </span>
+      </div>
+    </div>
+  </div>
+</b:includable>
+      <b:includable id='commentList' var='comments'>
+  <div id='comments-block'>
+    <b:loop values='data:comments' var='comment'>
+      <b:include data='comment' name='commentItem'/>
+    </b:loop>
+  </div>
+</b:includable>
+      <b:includable id='commentPicker' var='post'>
+  <b:if cond='data:post.showThreadedComments'>
+    <b:include data='post' name='threadedComments'/>
+  <b:else/>
+    <b:include data='post' name='comments'/>
+  </b:if>
+</b:includable>
+      <b:includable id='comments' var='post'>
+  <section expr:class='&quot;comments&quot; + (data:post.embedCommentForm ? &quot; embed&quot; : &quot;&quot;)' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+    <a name='comments'/>
+    <b:if cond='data:post.allowComments'>
+
+      <b:include name='commentsTitle'/>
+
+      <div expr:id='data:widget.instanceId + &quot;_comments-block-wrapper&quot;'>
+        <b:include cond='data:post.comments' data='post.comments' name='commentList'/>
+      </div>
+
+      <b:if cond='data:post.commentPagingRequired'>
+        <div class='paging-control-container'>
+          <b:if cond='data:post.hasOlderLinks'>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.oldestLinkUrl'>
+              <data:messages.oldest/>
+            </a>
+            <a expr:class='data:post.oldLinkClass' expr:href='data:post.olderLinkUrl'>
+              <data:messages.older/>
+            </a>
+          </b:if>
+
+          <span class='comment-range-text'>
+            <data:post.commentRangeText/>
+          </span>
+
+          <b:if cond='data:post.hasNewerLinks'>
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newerLinkUrl'>
+              <data:messages.newer/>
+            </a>
+            <a expr:class='data:post.newLinkClass' expr:href='data:post.newestLinkUrl'>
+              <data:messages.newest/>
+            </a>
+          </b:if>
+        </div>
+      </b:if>
+
+      <div class='footer'>
+        <b:if cond='data:post.embedCommentForm'>
+          <b:if cond='data:post.allowNewComments'>
+            <b:include data='post' name='commentForm'/>
+          <b:else/>
+            <data:post.noNewCommentsText/>
+          </b:if>
+        <b:else/>
+          <b:if cond='data:post.allowComments'>
+            <b:include data='post' name='addComments'/>
+          </b:if>
+        </b:if>
+      </div>
+    </b:if>
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+  </section>
+</b:includable>
+      <b:includable id='commentsTitle'>
+  <h3 class='title'><data:messages.comments/></h3>
+</b:includable>
+      <b:includable id='feedLinks'>
+  <b:if cond='!data:view.isPost'> <b:if cond='data:feedLinks'>
+      <div class='blog-feeds'>
+        <b:include data='feedLinks' name='feedLinksBody'/>
+      </div>
+    </b:if>
+  <b:else/> <div class='post-feeds'>
+      <b:loop values='data:posts' var='post'>
+        <b:if cond='data:post.allowComments and data:post.feedLinks'>
+          <b:include data='post.feedLinks' name='feedLinksBody'/>
+        </b:if>
+      </b:loop>
+    </div>
+  </b:if>
+</b:includable>
+      <b:includable id='feedLinksBody' var='links'>
+  <div class='feed-links'>
+  <data:messages.subscribeTo/>
+  <b:loop values='data:links' var='f'>
+     <a class='feed-link' expr:href='data:f.url' expr:type='data:f.mimeType' target='_blank'><data:f.name/> (<data:f.feedType/>)</a>
+  </b:loop>
+  </div>
+</b:includable>
+      <b:includable id='homePageLink'>
+  <a class='home-link' expr:href='data:blog.homepageUrl'>
+    <data:messages.home/>
+  </a>
+</b:includable>
+      <b:includable id='iframeComments' var='post'>
+  </b:includable>
+      <b:includable id='inlineAd' var='post'>
+  <b:if cond='!data:view.isPreview'>
+    <b:if cond='data:this.adCode or data:this.adClientId or data:blog.adsenseClientId'>
+      <div class='inline-ad'>
+        <b:if cond='data:this.adCode != &quot;&quot;'>
+          <data:this.adCode/>
+        <b:else/>
+          <b:include cond='data:this.adClientId or data:blog.adsenseClientId' name='defaultAdUnit'/>
+        </b:if>
+      </div>
+    </b:if>
+  <b:else/>
+    <div class='inline-ad'>
+      <div class='inline-ad-placeholder'>
+        <span><b:message name='messages.adsGoHere'/></span>
+      </div>
+    </div>
+  </b:if>
+</b:includable>
+      <b:includable id='nextPageLink'>
+  <a class='blog-pager-older-link' expr:href='data:olderPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-older-link&quot;' expr:title='data:messages.olderPosts'>
+    <data:messages.olderPosts/>
+  </a>
+</b:includable>
+      <b:includable id='nextprev'>
+        <div class='nextprev-links' style='margin-top: 3rem; display: flex; justify-content: space-between;'>
+          <b:if cond='data:newerPageUrl'>
+            <a class='btn-secondary' expr:href='data:newerPageUrl'>&#8592; Newer</a>
+          <b:else/>
+            <span/>
+          </b:if>
+          <b:if cond='data:olderPageUrl'>
+            <a class='btn-secondary' expr:href='data:olderPageUrl'>Older &#8594;</a>
+          </b:if>
+        </div>
+      </b:includable>
+      <b:includable id='post' var='post'>
+  <div class='post'>
+    <b:include data='post' name='postMeta'/>
+    <b:include data='post' name='postTitle'/>
+    <b:include name='headerByline'/>
+    <b:if cond='data:view.isSingleItem'>
+      <b:include data='post' name='postBody'/>
+    <b:else/>
+      <b:include data='post' name='postBodySnippet'/>
+      <b:include data='post' name='postJumpLink'/>
+    </b:if>
+    <b:include data='post' name='postFooter'/>
+  </div>
+</b:includable>
+      <b:includable id='postBody' var='post'>
+  <b:if cond='data:view.isPost'>
+    <div class='post-ad-top' style='margin: 1.5rem 0; text-align: center; min-height: 90px; background: rgba(108,99,255,0.05); border: 1px dashed rgba(108,99,255,0.3); display: flex; align-items: center; justify-content: center;'>
+       <span style='color: var(--text2); font-size: 0.8rem;'>AdSense Ad Slot (Top) - Paste In-Article Ad Code Here</span>
+       </div>
+  </b:if>
+
+  <div class='post-body entry-content float-container' expr:id='&quot;post-body-&quot; + data:post.id'>
+    <data:post.body/>
+  </div>
+
+  <b:if cond='data:view.isPost'>
+    <div class='post-ad-bottom' style='margin: 1.5rem 0; text-align: center; min-height: 90px; background: rgba(108,99,255,0.05); border: 1px dashed rgba(108,99,255,0.3); display: flex; align-items: center; justify-content: center;'>
+       <span style='color: var(--text2); font-size: 0.8rem;'>AdSense Ad Slot (Bottom) - Paste In-Article Ad Code Here</span>
+       </div>
+  </b:if>
+</b:includable>
+      <b:includable id='postBodySnippet' var='post'>
+  <b:include data='post' name='postBody'/>
+</b:includable>
+      <b:includable id='postCommentsAndAd' var='post'>
+  <article class='post-outer-container'>
+    <div class='post-outer'>
+      <b:include data='post' name='post'/>
+    </div>
+
+    <b:include cond='data:view.isSingleItem' data='post' name='commentPicker'/>
+
+    <b:include cond='data:view.isSingleItem and data:post.includeAd' data='post' name='inlineAd'/>
+  </article>
+
+  <!-- &#9472;&#9472; 1. LATEST POSTS AT THE END OF EACH BLOG POST &#9472;&#9472; -->
+  <b:if cond='data:view.isPost'>
+    <section class='standard-section' style='padding: 3rem 0 1rem; width: 100%; border-top: 1px dashed var(--border); margin-top: 2rem;'>
+      <div class='reveal visible'>
+        <div class='section-label'>Keep Reading</div>
+        <h2 class='section-title' style='font-size: 2rem;'>Latest Posts</h2>
+      </div>
+      <div class='blog-grid' id='dynamic-recent-posts'/>
+    </section>
+    
+    <script>
+      //<![CDATA[
+      // Fetch 4 recent posts (so we can skip the current one and still show 3)
+      fetch('/feeds/posts/default?alt=json&max-results=4')
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById('dynamic-recent-posts');
+          if(!container || !data.feed.entry) return;
+          
+          let html = '';
+          let count = 0;
+          const currentUrl = window.location.href.split('?')[0];
+          
+          data.feed.entry.forEach(entry => {
+            const link = entry.link.find(l => l.rel === 'alternate').href;
+            
+            // Do not show the post that the user is currently reading
+            if (link.split('?')[0] === currentUrl || count >= 3) return;
+            count++;
+            
+            const title = entry.title.$t;
+            const date = new Date(entry.published.$t).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            // Extract snippet
+            let rawContent = entry.summary ? entry.summary.$t : (entry.content ? entry.content.$t : '');
+            let snippet = rawContent.replace(/(<([^>]+)>)/gi, "").substring(0, 130) + '...';
+            
+            html += `
+              <div class="blog-card reveal visible" style="opacity: 1; transform: translateY(0);">
+                <div class="blog-date">${date}</div>
+                <h3 class="blog-title"><a href="${link}">${title}</a></h3>
+                <div class="blog-snippet">${snippet}</div>
+                <a class="read-more" href="${link}">Read More →</a>
+              </div>
+            `;
+          });
+          container.innerHTML = html;
+        });
+      //]]>
+    </script>
+  </b:if>
+
+  <b:include cond='data:view.isMultipleItems and data:post.includeAd' data='post' name='inlineAd'/>
+</b:includable>
+      <b:includable id='postCommentsLink'>
+  <b:if cond='data:view.isMultipleItems'>
+    <span class='byline post-comment-link container'>
+      <b:include cond='data:post.commentSource != 1' name='commentsLink'/>
+    </span>
+  </b:if>
+</b:includable>
+      <b:includable id='postFooter' var='post'>
+  <div class='post-footer'>
+    <b:include name='footerBylines'/>
+    <b:include data='post' name='postFooterAuthorProfile'/>
+  </div>
+</b:includable>
+      <b:includable id='postFooterAuthorProfile' var='post'>
+  <b:if cond='data:post.author.aboutMe and data:view.isPost'>
+    <div class='author-profile'>
+      <b:if cond='data:post.author.authorPhoto.url'>
+        <img class='author-image' expr:src='data:post.author.authorPhoto.url' width='50px'/>
+        <div class='author-about'>
+          <b:include data='post' name='aboutPostAuthor'/>
+        </div>
+      <b:else/>
+        <b:include data='post' name='aboutPostAuthor'/>
+      </b:if>
+    </div>
+  </b:if>
+</b:includable>
+      <b:includable id='postHeader' var='post'>
+  <b:include name='headerByline'/>
+</b:includable>
+      <b:includable id='postMeta' var='post'>
+  <b:include data='post' name='postMetadataJSON'/>
+</b:includable>
+      <b:includable id='postPagination'>
+  <div class='blog-pager container' id='blog-pager'>
+    <b:include cond='data:newerPageUrl' name='previousPageLink'/>
+    <b:include cond='data:olderPageUrl' name='nextPageLink'/>
+    <b:include cond='data:view.url != data:blog.homepageUrl' name='homePageLink'/>
+  </div>
+</b:includable>
+      <b:includable id='postTitle' var='post'>
+  <a expr:name='data:post.id'/>
+  <b:if cond='data:post.title != &quot;&quot;'>
+    <h3 class='post-title entry-title'>
+      <b:if cond='data:post.link or (data:post.url and data:view.url != data:post.url)'>
+        <a expr:href='data:post.link ?: data:post.url'><data:post.title/></a>
+      <b:else/>
+        <data:post.title/>
+      </b:if>
+    </h3>
+  </b:if>
+</b:includable>
+      <b:includable id='previousPageLink'>
+  <a class='blog-pager-newer-link' expr:href='data:newerPageUrl' expr:id='data:widget.instanceId + &quot;_blog-pager-newer-link&quot;' expr:title='data:messages.newerPosts'>
+    <data:messages.newerPosts/>
+  </a>
+</b:includable>
+      <b:includable id='threadedCommentForm' var='post'>
+  <div class='comment-form'>
+    <a name='comment-form'/>
+    <h4 id='comment-post-message'><data:messages.postAComment/></h4>
+    <b:if cond='data:this.messages.blogComment != &quot;&quot;'>
+      <p><data:this.messages.blogComment/></p>
+    </b:if>
+    <b:include data='post' name='commentFormIframeSrc'/>
+    <iframe allowtransparency='allowtransparency' class='blogger-iframe-colorize blogger-comment-from-post' expr:height='data:cmtIframeInitialHeight ?: &quot;90px&quot;' frameborder='0' id='comment-editor' name='comment-editor' src='' width='100%'/>
+    <data:post.cmtfpIframe/>
+    <script type='text/javascript'>
+      BLOG_CMT_createIframe(&#39;<data:post.appRpcRelayPath/>&#39;);
+    </script>
+  </div>
+</b:includable>
+      <b:includable id='threadedCommentJs' var='post'>
+  <script async='async' expr:src='data:post.commentSrc' type='text/javascript'/>
+  <b:template-script inline='true' name='threaded_comments'/>
+  <script type='text/javascript'>
+    blogger.widgets.blog.initThreadedComments(
+        <data:post.commentJso/>,
+        <data:post.commentMsgs/>,
+        <data:post.commentConfig/>);
+  </script>
+</b:includable>
+      <b:includable id='threadedComments' var='post'>
+  <section class='comments threaded' expr:data-embed='data:post.embedCommentForm' expr:data-num-comments='data:post.numberOfComments' id='comments'>
+    <a name='comments'/>
+
+    <b:include name='commentsTitle'/>
+
+    <div class='comments-content'>
+      <b:if cond='data:post.embedCommentForm'>
+        <b:include data='post' name='threadedCommentJs'/>
+      </b:if>
+      <div id='comment-holder'>
+         <data:post.commentHtml/>
+      </div>
+    </div>
+
+    <p class='comment-footer'>
+      <b:if cond='data:post.allowNewComments'>
+        <b:include data='post' name='threadedCommentForm'/>
+      <b:else/>
+        <data:post.noNewCommentsText/>
+      </b:if>
+      <b:if cond='data:post.showManageComments'>
+        <b:include data='post' name='manageComments'/>
+      </b:if>
+    </p>
+
+    <b:if cond='data:showCmtPopup'>
+      <div id='comment-popup'>
+        <iframe allowtransparency='allowtransparency' frameborder='0' id='comment-actions' name='comment-actions' scrolling='no'>
+        </iframe>
+      </div>
+    </b:if>
+  </section>
+</b:includable>
+      <b:includable id='tooltipCss'>
+  <style>
+    .post-body a.b-tooltip-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip {
+      display: block !important;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translate(-20%, 1px);
+      visibility: hidden;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.2s ease-in-out;
+    }
+
+    .post-body a.b-tooltip-container .b-tooltip iframe {
+      width: 200px;
+      height: 198px;
+      max-width: none;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (hover: hover) {
+      .post-body a.b-tooltip-container:hover .b-tooltip {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  </style>
+  </b:includable>
+    </b:widget>
+    <b:widget id='Text1' locked='false' title='Recent Blog Posts' type='Text' version='2' visible='false'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[Lorem Ipsum has been the industry's standard dummy text.]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'>
+                 <b:include name='widget-title'/>
+                 <p class='widget-content'><data:content/></p>
+               </b:includable>
+    </b:widget>
+    <b:widget id='HTML41' locked='false' title='Ad Slot (Middle)' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'/>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+    <b:widget id='HTML43' locked='false' title='Ad Slot (Top)' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'/>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+</section>
+
+<!-- &#9472;&#9472; 2. GET IN TOUCH SECTION AT THE END OF EVERY PAGE &#9472;&#9472; -->
+<hr class='divider reveal'/>
+  
+<b:section class='contact-container' id='contact-section' maxwidgets='1' showaddelement='yes'>
+  <b:widget id='HTML13' locked='false' title='Edit Contact' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[<section id="contact" class="standard-section" style="padding-top: 2rem;">
+  <div class="reveal">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-desc">Open to internships, collaborations, and interesting conversations.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info reveal delay-1">
+      <a class="contact-item" href="mailto:in.singhmayank@gmail.com">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">in.singhmayank@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-item" href="tel:+9779805315330">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-label">Phone</div>
+          <div class="contact-value">+977 9805315330</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor: default;">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Rajeev Nagar, Patna – 800024</div>
+        </div>
+      </div>
+      <div class="contact-item" style="cursor: default;">
+        <div class="contact-icon">🏫</div>
+        <div>
+          <div class="contact-label">Institution</div>
+          <div class="contact-value">IIT Patna · Bihta Campus</div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-card reveal delay-2">
+      <h3>Ready to build something great?</h3>
+      <p>Whether you're a startup looking for a versatile tech collaborator, a researcher exploring AI + security, or just someone with a cool idea — I'm always open to a conversation.</p>
+      <a class="btn-primary" href="mailto:in.singhmayank@gmail.com" style="align-self: flex-start;">
+        Send a Message →
+      </a>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+      <data:content/>
+    </b:includable>
+  </b:widget>
+</b:section>
+
+<b:section class='ad-wrapper' id='ad-bottom' maxwidgets='1' showaddelement='yes'>
+  <b:widget id='HTML42' locked='false' title='Ad Slot (Bottom)' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'/>
+    </b:widget-settings>
+    <b:includable id='main'><data:content/></b:includable>
+  </b:widget>
+</b:section>
+
+<footer class='site-footer'>
+  <div class='footer-bottom'>
+    <div class='footer-left'>
+      <p>&#169; 2026 Badmosh Mamu. All rights reserved.</p>
+    </div>
+    
+    <b:section class='footer-inline-links' id='footer-inline-links' maxwidgets='1' showaddelement='no'>
+      <b:widget id='HTML22' locked='false' title='Legal Links' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<div class="inline-legal-links">
+            <a href="/p/privacy-policy.html">Privacy Policy</a>
+            <a href="/p/terms.html">Terms & Conditions</a>
+            <a href="/p/disclaimer.html">Disclaimer</a>
+          </div>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'><data:content/></b:includable>
+      </b:widget>
+    </b:section>
+
+    <div class='footer-right'>
+      <p>Designed by <span class='footer-credit'>Mayank</span> with <span class='footer-heart'>&#9829;</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+//<![CDATA[
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
+    body.setAttribute('data-theme', current === 'light' ? '' : 'light');
+    localStorage.setItem('theme', body.getAttribute('data-theme'));
+  }
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') document.body.setAttribute('data-theme', 'light');
+  })();
+
+  // ── MOBILE MENU TOGGLE ──
+  function toggleMenu() {
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.toggle('active');
+  }
+
+  // ── SCROLL REVEAL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if(revealElements.length > 0) {
+      revealElements.forEach(el => observer.observe(el));
+  }
+  
+  // ── READING PROGRESS BAR ──
+  window.addEventListener('scroll', () => {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const progressBar = document.getElementById('reading-progress');
+    if (progressBar) progressBar.style.width = scrolled + '%';
+  });
+
+  // ── HIDE OVERLAY CLEANUP ──
+  setTimeout(() => {
+    const overlay = document.getElementById('intro-overlay');
+    if (overlay) overlay.style.display = 'none';
+  }, 3000);
+
+  // ── CLEANUP LEFTOVER SPACES FROM HIDDEN IMAGES ──
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('.post-container')) {
+      const postBodies = document.querySelectorAll('.post-body');
+      postBodies.forEach(body => {
+        let node = body.firstChild;
+        while (node) {
+          let next = node.nextSibling;
+          // Deletes leftover <br>, invisible wrappers, and empty paragraphs created by Blogger
+          if (node.nodeName === 'BR' || 
+             (node.nodeType === 3 && node.textContent.trim() === '') ||
+             (node.classList && node.classList.contains('separator')) ||
+             (node.nodeName === 'P' && node.innerHTML.trim() === '')) {
+            node.remove();
+          } else {
+            break; // Stop deleting once we hit actual text so the article is perfectly flush
+          }
+          node = next;
+        }
+      });
+    }
+  });
+//]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,903 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+  <script async='async' crossorigin='anonymous' src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX'/>
+
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+  <title><data:view.title.escaped/></title>
+  
+  <b:include data='blog' name='all-head-content'/>
+  <link expr:href='data:blog.url.canonical' rel='canonical'/>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <meta content='Mayank Raj, AI, Cybersecurity, IIT Patna, Hacker, Terminal, Matrix, Portfolio' name='keywords'/>
+  <meta content='index, follow' name='robots'/>
+  
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <meta expr:content='data:blog.pageName ? data:blog.pageName : data:blog.title' property='og:title'/>
+  <meta expr:content='data:blog.url.canonical' property='og:url'/>
+  <meta content='website' property='og:type'/>
+  <meta expr:content='data:blog.metaDescription' property='og:description'/>
+  <b:if cond='data:blog.postImageUrl'>
+    <meta expr:content='data:blog.postImageUrl' property='og:image'/>
+  </b:if>
+
+  <!-- PURE MONOSPACE HACKER FONT -->
+  <link href='https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;display=swap' rel='stylesheet'/>
+  
+  <b:skin><![CDATA[
+  :root {
+    /* TERMINAL COLOR PALETTE */
+    --bg-color: #030303;
+    --terminal-green: #00ff41;
+    --terminal-dark: #003b00;
+    --terminal-dim: rgba(0, 255, 65, 0.4);
+    --terminal-glow: rgba(0, 255, 65, 0.2);
+    --text-main: #00ff41;
+    --text-muted: #008f11;
+    --text-alert: #ff003c;
+    --font-mono: 'Share Tech Mono', monospace;
+    --border-style: 1px solid var(--terminal-green);
+  }
+  
+  /* SYSTEM BREACH MODE (Replaces Light Mode) */
+  [data-theme="breach"] {
+    --terminal-green: #ff003c;
+    --terminal-dark: #3b0000;
+    --terminal-dim: rgba(255, 0, 60, 0.4);
+    --terminal-glow: rgba(255, 0, 60, 0.2);
+    --text-main: #ff003c;
+    --text-muted: #8f0022;
+  }
+  
+  * { margin:0; padding:0; box-sizing:border-box; }
+  ::selection { background: var(--terminal-green); color: #000; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    background: var(--bg-color);
+    color: var(--text-main);
+    transition: color 0.1s;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6, a {
+    font-family: var(--font-mono);
+    color: var(--text-main);
+    text-transform: uppercase;
+  }
+  a { text-decoration: none; }
+
+  /* ── CRT OVERLAY EFFECT ── */
+  .crt::before {
+    content: " ";
+    display: block;
+    position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 9998; background-size: 100% 2px, 3px 100%; pointer-events: none;
+  }
+  .crt::after {
+    content: " ";
+    display: block;
+    position: fixed; top: 0; left: 0; bottom: 0; right: 0;
+    background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
+    z-index: 9999; pointer-events: none;
+  }
+
+  /* ── LIVE MATRIX BACKGROUND (Canvas Layer) ── */
+  #matrixCanvas {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -2; background: #000;
+  }
+
+  /* ── GLITCH ANIMATIONS ── */
+  .glitch { position: relative; display: inline-block; }
+  .glitch:hover { animation: glitch-anim 0.2s linear infinite; text-shadow: 2px 0 var(--text-alert), -2px 0 blue; }
+  @keyframes glitch-anim {
+    0% { transform: translate(0) }
+    20% { transform: translate(-2px, 2px) }
+    40% { transform: translate(-2px, -2px) }
+    60% { transform: translate(2px, 2px) }
+    80% { transform: translate(2px, -2px) }
+    100% { transform: translate(0) }
+  }
+  .blink { animation: blinker 1s linear infinite; }
+  @keyframes blinker { 50% { opacity: 0; } }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.4s, transform 0.4s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+
+  /* ── INTRO SEQUENCE ── */
+  #intro-overlay {
+    position: fixed; inset: 0; z-index: 10000; background: #000;
+    display: flex; align-items: flex-start; justify-content: flex-start; padding: 2rem;
+    animation: overlayOut 0.1s step-end 3s forwards;
+  }
+  .boot-sequence { color: var(--terminal-green); font-size: 1rem; line-height: 1.5; }
+  .boot-line { opacity: 0; margin-bottom: 5px; }
+  .boot-line:nth-child(1) { animation: showLine 0.1s forwards 0.2s; }
+  .boot-line:nth-child(2) { animation: showLine 0.1s forwards 0.6s; }
+  .boot-line:nth-child(3) { animation: showLine 0.1s forwards 1.2s; }
+  .boot-line:nth-child(4) { animation: showLine 0.1s forwards 1.5s; color: var(--text-alert); }
+  .boot-line:nth-child(5) { animation: showLine 0.1s forwards 2.0s; }
+  @keyframes showLine { to { opacity: 1; } }
+  @keyframes overlayOut { to { opacity: 0; pointer-events: none; display: none; } }
+  
+  /* ── TERMINAL NAV ── */
+  nav { position: relative; z-index: 100; background: rgba(0,0,0,0.85); border-bottom: 2px dashed var(--terminal-dim); padding: 0.5rem 0; }
+  .nav-container { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 1200px; padding: 0.5rem 2rem; margin: 0 auto; }
+  .nav-logo-section .widget { margin: 0; }
+  .nav-logo { font-size: 1.5rem; font-weight: bold; color: var(--terminal-green); }
+  .nav-logo::before { content: "root@"; color: var(--text-muted); }
+  
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links-wrapper .widget { margin: 0; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; margin: 0; padding: 0; }
+  .nav-links a { color: var(--text-muted); font-size: 1rem; font-weight: bold; transition: all 0.2s; }
+  .nav-links a:hover { color: var(--terminal-green); background: var(--terminal-dark); padding: 0 5px; }
+  .nav-links a::before { content: "[ "; color: var(--terminal-dim); opacity: 0; transition: opacity 0.2s; }
+  .nav-links a::after { content: " ]"; color: var(--terminal-dim); opacity: 0; transition: opacity 0.2s; }
+  .nav-links a:hover::before, .nav-links a:hover::after { opacity: 1; }
+  
+  /* ── DROPDOWN ── */
+  .dropdown { position: relative; display: inline-block; }
+  .dropdown .dropbtn { cursor: pointer; display: flex; align-items: center; gap: 4px; }
+  .dropdown-content { display: none; position: absolute; background-color: #000; border: var(--border-style); min-width: 200px; top: 100%; left: 0; z-index: 101; padding: 0.5rem; }
+  .dropdown-content a { color: var(--terminal-green); padding: 0.5rem; display: block; font-size: 0.9rem; border-bottom: 1px dashed var(--terminal-dim); }
+  .dropdown-content a:hover { background-color: var(--terminal-dark); color: #fff; }
+  .dropdown:hover .dropdown-content { display: block; }
+  
+  .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; color: var(--terminal-green); font-family: var(--font-mono); font-size: 1.5rem; }
+
+  /* ── CLI SEARCH BAR ── */
+  .search-form { display: flex; align-items: center; position: relative; background: #000; border: var(--border-style); padding: 0.2rem 0.5rem; }
+  .search-form::before { content: ">"; color: var(--terminal-green); margin-right: 5px; font-weight: bold; }
+  .search-input { background: transparent; border: none; color: var(--terminal-green); font-family: var(--font-mono); font-size: 0.9rem; width: 140px; }
+  .search-input::placeholder { color: var(--terminal-dim); }
+  .search-input:focus { outline: none; width: 180px; }
+  .search-btn { display: none; } /* Hidden, press enter to search */
+
+  /* ── BREACH TOGGLE ── */
+  #theme-toggle { background: #000; border: var(--border-style); color: var(--terminal-green); font-family: var(--font-mono); font-size: 0.8rem; padding: 0.4rem 0.8rem; cursor: pointer; text-transform: uppercase; transition: all 0.2s; }
+  #theme-toggle:hover { background: var(--terminal-green); color: #000; }
+  [data-theme="breach"] #theme-toggle { border-color: var(--text-alert); color: var(--text-alert); }
+  [data-theme="breach"] #theme-toggle:hover { background: var(--text-alert); color: #000; }
+
+  /* ── CLI BUTTONS ── */
+  .btn-primary, .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.8rem 1.5rem; background: #000; color: var(--terminal-green);
+    border: var(--border-style); font-family: var(--font-mono); font-size: 1rem; font-weight: bold;
+    cursor: pointer; transition: all 0.1s; text-decoration: none;
+  }
+  .btn-primary::before { content: "./"; color: var(--text-muted); }
+  .btn-primary:hover { background: var(--terminal-green); color: #000 !important; box-shadow: 0 0 15px var(--terminal-glow); }
+  .btn-primary:hover::before { color: #000; }
+  .btn-secondary { border-style: dashed; }
+  .btn-secondary:hover { border-style: solid; background: var(--terminal-dark); }
+
+  /* ── HERO / TERMINAL WELCOME ── */
+  .hero { min-height: 70vh; padding: 4rem 2rem; position: relative; display: flex; flex-direction: column; justify-content: center; z-index: 10; max-width: 1000px; margin: 0 auto; }
+  .hero-prompt { color: var(--text-muted); margin-bottom: 1rem; }
+  .hero-title { font-size: clamp(2rem, 5vw, 4rem); font-weight: normal; line-height: 1.2; margin-bottom: 1.5rem; }
+  .hero-title span { color: #fff; background: var(--terminal-green); color: #000; padding: 0 10px; }
+  [data-theme="breach"] .hero-title span { background: var(--text-alert); }
+  .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 3rem; max-width: 700px; border-left: 2px solid var(--terminal-dim); padding-left: 1rem; }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  /* ── TERMINAL CARDS ── */
+  .terminal-card {
+    background: rgba(0, 5, 0, 0.85); border: var(--border-style);
+    position: relative; padding: 2.5rem 2rem 2rem 2rem; margin-bottom: 2rem;
+    box-shadow: 5px 5px 0px var(--terminal-dark); transition: transform 0.2s;
+  }
+  .terminal-card::before {
+    content: "sysadmin@mr-ai-sec:~# " attr(data-title);
+    position: absolute; top: 0; left: 0; width: 100%; background: var(--terminal-green); color: #000;
+    padding: 3px 10px; font-size: 0.85rem; font-weight: bold; box-sizing: border-box;
+  }
+  [data-theme="breach"] .terminal-card { background: rgba(10, 0, 0, 0.85); box-shadow: 5px 5px 0px var(--terminal-dark); }
+  .terminal-card:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0px var(--terminal-dim); }
+
+  /* ── GITHUB & YOUTUBE TERMINALS ── */
+  .stats-yt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .github-banner, .yt-banner { text-align: left; }
+  .github-banner .ascii-icon, .yt-banner .ascii-icon { font-size: 0.7rem; line-height: 1; color: var(--text-muted); margin-bottom: 1rem; white-space: pre; }
+  
+  /* ── SECTIONS ── */
+  section.standard-section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+  .section-label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+  .section-label::before { content: "cd "; }
+  .section-title { font-size: 2.5rem; margin-bottom: 2rem; border-bottom: 1px dashed var(--terminal-dim); padding-bottom: 0.5rem; display: inline-block; }
+  .section-title::after { content: " █"; animation: blinker 1s step-end infinite; }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .about-text { color: var(--terminal-green); line-height: 1.7; font-size: 1.05rem; }
+  .about-text p { margin-bottom: 1rem; }
+  .about-text p::before { content: "> "; color: var(--text-muted); }
+  
+  .highlight-item { border-left: 2px solid var(--terminal-green); padding-left: 1rem; margin-bottom: 1.5rem; }
+  .highlight-info strong { display: block; color: #fff; font-size: 1.1rem; margin-bottom: 4px; }
+  .highlight-info span { color: var(--text-muted); font-size: 0.95rem; }
+  
+  /* ── EXPERIENCE LOG ── */
+  .timeline { border-left: 1px dashed var(--terminal-green); padding-left: 2rem; margin-left: 10px; }
+  .timeline-item { position: relative; margin-bottom: 3rem; }
+  .timeline-item::before { content: "[+]"; position: absolute; left: -2.85rem; top: 0; background: #000; color: var(--terminal-green); font-weight: bold; padding: 2px; }
+  .timeline-period { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px; }
+  .timeline-role { font-size: 1.3rem; color: #fff; margin-bottom: 5px; }
+  .timeline-org { color: var(--terminal-green); margin-bottom: 1rem; }
+  .timeline-points li { margin-bottom: 5px; color: var(--text-muted); }
+  .timeline-points li::before { content: "  |- "; color: var(--terminal-dim); }
+
+  /* ── PROJECTS / EXPLOITS ── */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .project-card .project-date { color: var(--text-muted); font-size: 0.85rem; border-bottom: 1px solid var(--terminal-dark); padding-bottom: 5px; margin-bottom: 1rem; }
+  .project-name { font-size: 1.2rem; color: #fff; margin-bottom: 1rem; }
+  .project-name::before { content: "DIR: "; color: var(--text-muted); }
+  .project-desc { color: var(--terminal-green); line-height: 1.5; }
+
+  /* ── BLOG / LOGS ── */
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+  .blog-card .blog-date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.5rem; }
+  .blog-title { font-size: 1.3rem; margin-bottom: 1rem; }
+  .blog-title a { color: #fff; text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .blog-title a:hover { color: var(--terminal-green); text-decoration-style: solid; background: var(--terminal-dark); }
+  .blog-snippet { color: var(--text-muted); line-height: 1.5; margin-bottom: 1.5rem; flex-grow: 1; }
+  .read-more { font-weight: bold; background: var(--terminal-dark); padding: 5px 10px; border: var(--border-style); color: var(--terminal-green) !important; }
+  .read-more:hover { background: var(--terminal-green); color: #000 !important; }
+  
+  /* ── FULL POST VIEW ── */
+  .post-container { @extend .terminal-card; max-width: 900px; margin: 2rem auto; }
+  .post-header { border-bottom: 1px dashed var(--terminal-dim); padding-bottom: 2rem; margin-bottom: 2rem; text-align: left; }
+  .post-header h1 { font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin: 1rem 0; }
+  .post-meta-tags { display: flex; gap: 1rem; color: var(--text-muted); font-size: 0.9rem; }
+  .post-tag { background: #000; border: 1px solid var(--text-muted); padding: 2px 8px; }
+  
+  .post-hero-image { border: var(--border-style); padding: 5px; background: #000; margin-bottom: 2rem; filter: grayscale(100%) contrast(1.2); transition: filter 0.3s; }
+  .post-hero-image:hover { filter: grayscale(0%); }
+  .post-hero-image img { width: 100% !important; height: auto !important; display: block; }
+  .post-body .separator, .post-body img { display: none !important; }
+
+  .post-body { color: var(--terminal-green); line-height: 1.7; }
+  .post-body h2, .post-body h3 { color: #fff; margin: 2.5rem 0 1rem; border-left: 4px solid var(--terminal-green); padding-left: 10px; }
+  .post-body p { margin-bottom: 1.5rem; }
+  .post-body a { color: #fff; border-bottom: 1px dashed #fff; background: var(--terminal-dark); padding: 0 4px; }
+  .post-body a:hover { background: #fff; color: #000; }
+  .post-body blockquote { border: 1px solid var(--terminal-dim); border-left: 4px solid var(--terminal-green); padding: 1rem; margin: 2rem 0; background: rgba(0,255,65,0.05); font-style: italic; }
+  .post-body pre { background: #000; border: var(--border-style); padding: 1rem; overflow-x: auto; margin: 2rem 0; color: #fff; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+  .skill-category .skill-cat-title { color: #fff; border-bottom: 1px solid var(--terminal-dim); padding-bottom: 5px; margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag { background: #000; border: 1px solid var(--terminal-dim); padding: 4px 8px; font-size: 0.85rem; color: var(--terminal-green); }
+  .skill-tag:hover { background: var(--terminal-green); color: #000; border-color: var(--terminal-green); }
+
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+  .cert-issuer { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 5px; }
+  .cert-name { color: #fff; margin-bottom: 5px; }
+
+  /* ── CONTACT ── */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; border: 1px dashed transparent; padding: 10px; }
+  .contact-item:hover { border-color: var(--terminal-green); background: var(--terminal-dark); }
+  .contact-label { color: var(--text-muted); font-size: 0.85rem; }
+  .contact-value { color: #fff; font-size: 1.1rem; }
+  .contact-card { background: #000; border: var(--border-style); padding: 2rem; }
+
+  /* ── AD BLOCKS ── */
+  .ad-sponsor-block {
+    margin: 2rem 0; padding: 1rem; border: 1px dashed var(--text-alert); background: #000; text-align: center; position: relative;
+  }
+  .ad-sponsor-label { position: absolute; top: -10px; left: 10px; background: #000; color: var(--text-alert); padding: 0 5px; font-size: 0.8rem; }
+
+  /* ── FOOTER ── */
+  .site-footer { border-top: var(--border-style); background: #000; padding: 2rem; margin-top: 4rem; position: relative; z-index: 10; text-align: center; }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-bottom p { color: var(--text-muted); font-size: 0.9rem; margin: 0; }
+  .inline-legal-links { display: flex; gap: 1.5rem; }
+  .inline-legal-links a { color: var(--terminal-green); font-size: 0.85rem; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .stats-yt-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hamburger { display: block; }
+    .nav-right {
+      display: none; position: absolute; top: 100%; left: 0; width: 100%;
+      background: #000; border-bottom: var(--border-style);
+      flex-direction: column; padding: 1rem; gap: 1rem; z-index: 100;
+    }
+    .nav-right.active { display: flex; }
+    .nav-links { flex-direction: column; width: 100%; gap: 1rem; align-items: flex-start; }
+    .search-form { width: 100%; margin-bottom: 1rem; }
+    .dropdown-content { position: static; min-width: 100%; border: none; padding-left: 1rem; }
+    .footer-bottom { flex-direction: column; justify-content: center; }
+  }
+  
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #000; border-left: 1px solid var(--terminal-dark); }
+  ::-webkit-scrollbar-thumb { background: var(--terminal-green); }
+  [data-theme="breach"] ::-webkit-scrollbar-thumb { background: var(--text-alert); }
+  ]]></b:skin>
+</head>
+<body class="crt">
+
+<canvas id="matrixCanvas"></canvas>
+
+<b:if cond='data:view.isHomepage'>
+  <div id='intro-overlay'>
+    <div class='boot-sequence'>
+      <div class='boot-line'>BIOS Date 06/13/26 01:26:03 Ver 08.00.15</div>
+      <div class='boot-line'>CPU: Neural Link Processor, Speed: 4.2 GHz</div>
+      <div class='boot-line'>Loading kernel parameters... done.</div>
+      <div class='boot-line'>WARNING: UNAUTHORIZED ACCESS DETECTED.</div>
+      <div class='boot-line'>Starting user session: sysadmin... OK.</div>
+    </div>
+  </div>
+</b:if>
+
+<nav>
+  <div class='nav-container'>
+    <b:section class='nav-logo-section' id='nav-logo' maxwidgets='1' showaddelement='no'>
+      <b:widget id='HTML99' locked='false' title='Edit Logo' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<a class="nav-logo glitch" href="/">mr_ai_sec</a>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'><data:content/></b:includable>
+      </b:widget>
+    </b:section>
+    
+    <button aria-label='Menu' class='hamburger' onclick='toggleMenu()'>[MENU]</button>
+    
+    <div class='nav-right' id='nav-menu'>
+      <b:section class='nav-links-wrapper' id='nav-links-editable' maxwidgets='1' showaddelement='yes'>
+        <b:widget id='HTML25' locked='false' title='Edit Nav Links &amp;amp; Dropdown' type='HTML' version='2' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='content'><![CDATA[<ul class="nav-links">
+                <li><a href="/">~/home</a></li>
+                <li><a href="/#about">./whoami</a></li>
+                <li><a href="/#projects">cd /exploits</a></li>
+                <li class="dropdown">
+                  <a href="javascript:void(0)" class="dropbtn">ls -l /sys ▾</a>
+                  <div class="dropdown-content">
+                    <a href="/p/about.html">cat about.txt</a>
+                    <a href="/p/contact.html">./contact.sh</a>
+                    <a href="/p/privacy-policy.html">chmod 700 privacy</a>
+                    <a href="/p/terms.html">cat terms.log</a>
+                  </div>
+                </li>
+              </ul>]]></b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'><data:content/></b:includable>
+        </b:widget>
+      </b:section>
+      
+      <form action='/search' class='search-form' method='get'>
+        <input class='search-input' name='q' placeholder='grep -r...' required='required' type='text'/>
+        <button aria-label='Search' class='search-btn' type='submit'>GO</button>
+      </form>
+
+      <button aria-label='Toggle Breach Mode' id='theme-toggle' onclick='toggleTheme()'>
+        [ BREACH ]
+      </button>
+    </div>
+  </div>
+</nav>
+
+<b:if cond='data:view.isHomepage'>
+  
+  <b:section class='hero-section' id='hero-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML10' locked='false' title='Edit Hero Area' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<div class="hero reveal">
+      <div class="hero-prompt">guest@system:~$ ./execute_portfolio.sh</div>
+      <h1 class="hero-title glitch">
+        BUILDING SECURE<br/>
+        <span>AI SYSTEMS</span><br/>
+        OF TOMORROW
+      </h1>
+      <p class="hero-desc">
+        > Status: 2nd year BS student @ IIT Patna.<br/>
+        > Specialization: Artificial Intelligence & Cybersecurity.<br/>
+        > Objective: Decentralized systems, machine learning, and building exploit-resistant architecture.
+      </p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#blog">cat /var/log/blog</a>
+        <a class="btn-secondary" href="#contact">ping -c 4 contact</a>
+      </div>
+      
+      <div class="stats-yt-grid">
+        <div class="terminal-card github-banner reveal delay-1" data-title="git-monitor.exe">
+          <div class="ascii-icon">
+   _____ _ _     _           _     
+  / ____(_) |   | |         | |    
+ | |  __ _| |_  | |__  _   _| |__  
+ | | |_ | | __| | '_ \| | | | '_ \ 
+ | |__| | | |_  | | | | |_| | | | |
+  \_____|_|\__| |_| |_|\__,_|_| |_|
+          </div>
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff;">Explore Source</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Access latest AI models, cyber scripts, and open-source payloads.</p>
+          <a href="http://github.com/singhmaxank" target="_blank" class="btn-secondary">clone repository</a>
+        </div>
+
+        <div class="terminal-card yt-banner reveal delay-2" data-title="stream_intercept.sh">
+          <div class="ascii-icon">
+ __     __         _______    _          
+ \ \   / /        |__   __|  | |         
+  \ \_/ /__  _   _   | |_   _| |__   ___ 
+   \   / _ \| | | |  | | | | | '_ \ / _ \
+    | | (_) | |_| |  | | |_| | |_) |  __/
+    |_|\___/ \__,_|  |_|\__,_|_.__/ \___|
+          </div>
+          <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff;">Intercept Feed</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Live analysis of AI developments and network penetration tactics.</p>
+          <a href="https://www.youtube.com/@badmoshmamu" target="_blank" class="btn-secondary">connect stream</a>
+        </div>
+      </div>
+    </div>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'>
+        <data:content/>
+      </b:includable>
+    </b:widget>
+  </b:section>
+
+  <b:section class='about-container' id='about-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML11' locked='false' title='Edit About' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="about" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">./about_me</div>
+    <h2 class="section-title glitch">WHOAMI</h2>
+  </div>
+  <div class="about-grid">
+    <div class="terminal-card about-text reveal delay-1" data-title="user_profile.dat">
+      <p>ID: Mayank Raj. Rank: 2nd-year BS student at IIT Patna (AI & Cybersecurity). CGPA rating: 9.53.</p>
+      <p>Background log: Led a technical team in Nepal for two years, managing full lifecycles. Contributed to network-building at Rotary's Interact Club. Field experience verified.</p>
+      <p>Secondary skills: Social Media Manager at Orgazz Enterprises. Communicating complex systemic data into visual interfaces.</p>
+    </div>
+    <div class="about-highlights reveal delay-2">
+      <div class="highlight-item"><div class="highlight-info"><strong>[ NODE 1 ] IIT Patna</strong><span>BS in AI & Cybersecurity // CGPA 9.53/10</span></div></div>
+      <div class="highlight-item"><div class="highlight-info"><strong>[ NODE 2 ] Cybersecurity</strong><span>Deloitte Forage certified // Secure architecture</span></div></div>
+      <div class="highlight-item"><div class="highlight-info"><strong>[ NODE 3 ] AI & ML Spec</strong><span>HCL GUVI certified // Satellite ML tracking</span></div></div>
+      <div class="highlight-item"><div class="highlight-info"><strong>[ NODE 4 ] Network Origin</strong><span>Nepal + India cross-server routing</span></div></div>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <b:section class='experience-container' id='experience-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML14' locked='false' title='Edit Experience' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="experience" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">cat /var/log/history</div>
+    <h2 class="section-title glitch">SYS_HISTORY</h2>
+  </div>
+  <div class="timeline terminal-card reveal delay-1" data-title="sys_log_parser">
+    <div class="timeline-item">
+      <div class="timeline-period">TIMESTAMP: Sep 2025 – Feb 2026</div>
+      <div class="timeline-role">Social Media Manager</div>
+      <div class="timeline-org">TARGET: Orgazz Enterprises LLP · Noida</div>
+      <ul class="timeline-points">
+        <li>Engineered company's e-commerce portal and graphic system.</li>
+        <li>Injected data-driven marketing algorithms to scale online footprint.</li>
+        <li>Deployed multi-platform content nodes.</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-period">TIMESTAMP: Sep 2020 – Sep 2022</div>
+      <div class="timeline-role">Tech Team Lead</div>
+      <div class="timeline-org">TARGET: The Gream Project · Nepal</div>
+      <ul class="timeline-points">
+        <li>Controlled end-to-end execution cycles.</li>
+        <li>Directed operatives to finalize multi-phase operations over two years.</li>
+      </ul>
+    </div>
+    <div class="timeline-item" style="margin-bottom:0;">
+      <div class="timeline-period">TIMESTAMP: Feb 2020 – Feb 2022</div>
+      <div class="timeline-role">Technical Node Operator</div>
+      <div class="timeline-org">TARGET: Interact (Rotary Club) · Nepal</div>
+      <ul class="timeline-points">
+        <li>Executed community protocols and local outreach.</li>
+        <li>Maintained cross-functional technical support.</li>
+      </ul>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <b:section class='projects-container' id='projects-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML15' locked='false' title='Edit Projects' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="projects" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">ls -a /active_exploits</div>
+    <h2 class="section-title glitch">PAYLOADS</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="terminal-card project-card reveal delay-1" data-title="lmrl_core.exe">
+      <div class="project-date">T-MINUS: May 2026</div>
+      <div class="project-name">Lifelong Medical Records Ledger</div>
+      <div class="project-desc">Decentralized health data architecture for India. Secure ledger protocol. Tamper-resistant. Privacy overlay enabled.</div>
+    </div>
+    <div class="terminal-card project-card reveal delay-2" data-title="timber_track.ai">
+      <div class="project-date">T-MINUS: Dec 2025</div>
+      <div class="project-name">Illegal Logging Detection Model</div>
+      <div class="project-desc">AI neural net ingesting satellite imagery arrays to identify unregulated geographical logging practices.</div>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+
+  <b:section class='skills-container' id='skills-section' maxwidgets='1' showaddelement='yes'>
+    <b:widget id='HTML12' locked='false' title='Edit Skills' type='HTML' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='content'><![CDATA[<section id="skills" class="standard-section">
+  <div class="reveal">
+    <div class="section-label">cat /sys/capabilities</div>
+    <h2 class="section-title glitch">MODULES</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="terminal-card skill-category reveal delay-1" data-title="web_layer">
+      <div class="skill-cat-title">PORT 80/443</div>
+      <div class="skill-tags"><span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">SQL_INJ</span><span class="skill-tag">JS</span></div>
+    </div>
+    <div class="terminal-card skill-category reveal delay-2" data-title="core_logic">
+      <div class="skill-cat-title">AI & SEC</div>
+      <div class="skill-tags"><span class="skill-tag">Neural_Nets</span><span class="skill-tag">Data_Sci</span><span class="skill-tag">Net_Sec</span></div>
+    </div>
+    <div class="terminal-card skill-category reveal delay-3" data-title="visual_engine">
+      <div class="skill-cat-title">GRAPHICS</div>
+      <div class="skill-tags"><span class="skill-tag">Pr_Pro</span><span class="skill-tag">Ps</span><span class="skill-tag">UI_UX</span></div>
+    </div>
+  </div>
+
+  <div class="reveal" style="margin-top: 4rem;">
+    <div class="section-label">verify_certificates.sh</div>
+    <h3 style="font-size: 1.5rem; color: #fff; margin-bottom: 1.5rem;">SYS_CERTS</h3>
+  </div>
+  <div class="certs-grid">
+    <div class="terminal-card cert-card reveal delay-1" data-title="cert_01"><div class="cert-issuer">AUTHORITY: Sololearn</div><div class="cert-name">Web Protocol</div></div>
+    <div class="terminal-card cert-card reveal delay-2" data-title="cert_02"><div class="cert-issuer">AUTHORITY: Canva</div><div class="cert-name">Graphic Vectors</div></div>
+    <div class="terminal-card cert-card reveal delay-3" data-title="cert_03"><div class="cert-issuer">AUTHORITY: HCL GUVI</div><div class="cert-name">Data Science Core</div></div>
+    <div class="terminal-card cert-card reveal delay-1" data-title="cert_04"><div class="cert-issuer">AUTHORITY: Deloitte</div><div class="cert-name">Cyber Simulation</div></div>
+  </div>
+</section>]]></b:widget-setting>
+      </b:widget-settings>
+      <b:includable id='main'><data:content/></b:includable>
+    </b:widget>
+  </b:section>
+</b:if>
+
+<section class='standard-section' id='blog'>
+  <b:if cond='data:view.isHomepage'>
+    <div class='reveal'>
+      <div class='section-label'>tail -f /var/log/syslog</div>
+      <h2 class='section-title glitch'>TERMINAL LOGS</h2>
+    </div>
+  </b:if>
+  
+  <b:if cond='data:view.isSearch'>
+    <div class='reveal'>
+      <div class='section-label'>grep results</div>
+      <h2 class='section-title'>MATCH: &quot;<data:view.search.query.escaped/>&quot;</h2>
+    </div>
+  </b:if>
+
+  <b:section class='main' id='main' name='Main Posts' showaddelement='yes'>
+    <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2' visible='true'>
+      <b:widget-settings>
+        <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+        <b:widget-setting name='commentLabel'>Pingbacks</b:widget-setting>
+        <!-- settings omitted for brevity, kept functional -->
+      </b:widget-settings>
+      <b:includable id='main' var='top'>
+        
+        <b:if cond='data:view.isMultipleItems'>
+          <b:if cond='data:posts.empty'>
+            <div class='terminal-card reveal' data-title="error.log" style='text-align: center;'>
+              <span style="color: var(--text-alert); font-size: 1.5rem;">FATAL ERROR: NO DATA BLOCKS FOUND.</span>
+            </div>
+          <b:else/>
+            <div class='blog-grid'>
+              <b:loop values='data:posts' var='post'>
+                <div class='terminal-card blog-card reveal' data-title='post_data.db'>
+                  <div class='blog-date'>[<data:post.date/>]</div>
+                  <h3 class='blog-title'>
+                    <a expr:href='data:post.url'><data:post.title/></a>
+                  </h3>
+                  <div class='blog-snippet'>
+                    <b:eval expr='data:post.body snippet { length: 150, links: false, linebreaks: false }'/>
+                  </div>
+                  <a class='read-more' expr:href='data:post.url'>./decrypt_file</a>
+                </div>
+              </b:loop>
+            </div>
+          </b:if>
+          <b:include name='nextprev'/>
+          
+        <b:else/>
+          <b:loop values='data:posts' var='post'>
+            <div class='post-container reveal' data-title='sys_report.txt'>
+              <div class='post-header'>
+                <div class='blog-date'>TIMESTAMP: <data:post.date/></div>
+                <h1><data:post.title/></h1>
+                <div class='post-meta-tags'>
+                  <b:if cond='data:post.labels'>
+                    <b:loop values='data:post.labels' var='label'>
+                      <span class='post-tag'>#<data:label.name/></span>
+                    </b:loop>
+                  </b:if>
+                  <span style='color: var(--terminal-green);'>|</span>
+                  <span>AUTHOR: <data:post.author.name/></span>
+                </div>
+              </div>
+              
+              <b:if cond='data:post.featuredImage'>
+                <div class='post-hero-image'>
+                  <img expr:alt='data:post.title' expr:src='resizeImage(data:post.featuredImage, 1200, &quot;16:9&quot;)'/>
+                </div>
+              </b:if>
+
+              <div class='post-body'>
+                <data:post.body/>
+              </div>
+            </div>
+          </b:loop>
+        </b:if>
+      </b:includable>
+      
+      <!-- INCLUDABLES FOR ADVERTISEMENTS IN CLI FORMAT -->
+      <b:includable id='inlineAd' var='post'>
+        <b:if cond='!data:view.isPreview'>
+          <b:if cond='data:this.adCode or data:this.adClientId or data:blog.adsenseClientId'>
+            <div class='ad-sponsor-block'>
+              <div class='ad-sponsor-label'>[ ADVERTISEMENT DATABLOCK ]</div>
+              <b:if cond='data:this.adCode != &quot;&quot;'>
+                <data:this.adCode/>
+              <b:else/>
+                <b:include cond='data:this.adClientId or data:blog.adsenseClientId' name='defaultAdUnit'/>
+              </b:if>
+            </div>
+          </b:if>
+        <b:else/>
+          <div class='ad-sponsor-block'>
+            <div class='ad-sponsor-label'>[ ADVERTISEMENT DATABLOCK ]</div>
+            <span>WAITING FOR SPONSOR INJECTION...</span>
+          </div>
+        </b:if>
+      </b:includable>
+      
+      <b:includable id='nextprev'>
+        <div class='nextprev-links' style='margin-top: 3rem; display: flex; justify-content: space-between;'>
+          <b:if cond='data:newerPageUrl'>
+            <a class='btn-secondary' expr:href='data:newerPageUrl'>&lt; FETCH NEWER</a>
+          <b:else/>
+            <span/>
+          </b:if>
+          <b:if cond='data:olderPageUrl'>
+            <a class='btn-secondary' expr:href='data:olderPageUrl'>FETCH OLDER &gt;</a>
+          </b:if>
+        </div>
+      </b:includable>
+      
+      <b:includable id='aboutPostAuthor'>...</b:includable>
+      <b:includable id='addComments'>...</b:includable>
+    </b:widget>
+    
+    <b:widget id='HTML41' locked='false' title='Ad Slot (Middle)' type='HTML' version='2' visible='true'>
+      <b:widget-settings><b:widget-setting name='content'/></b:widget-settings>
+      <b:includable id='main'><div class="ad-sponsor-block"><div class="ad-sponsor-label">[ INJECTED AD ]</div><data:content/></div></b:includable>
+    </b:widget>
+    
+    <b:widget id='HTML43' locked='false' title='Ad Slot (Top)' type='HTML' version='2' visible='true'>
+      <b:widget-settings><b:widget-setting name='content'/></b:widget-settings>
+      <b:includable id='main'><div class="ad-sponsor-block"><div class="ad-sponsor-label">[ INJECTED AD ]</div><data:content/></div></b:includable>
+    </b:widget>
+  </b:section>
+</section>
+
+<b:section class='contact-container' id='contact-section' maxwidgets='1' showaddelement='yes'>
+  <b:widget id='HTML13' locked='false' title='Edit Contact' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[<section id="contact" class="standard-section" style="padding-top: 2rem;">
+  <div class="reveal">
+    <div class="section-label">./initiate_handshake.sh</div>
+    <h2 class="section-title glitch">NETWORK COMMS</h2>
+  </div>
+  <div class="contact-grid">
+    <div class="terminal-card contact-info reveal delay-1" data-title="endpoints.cfg">
+      <a class="contact-item" href="mailto:in.singhmayank@gmail.com">
+        <div>
+          <div class="contact-label">SECURE SMTP:</div>
+          <div class="contact-value">in.singhmayank@gmail.com</div>
+        </div>
+      </a>
+      <a class="contact-item" href="tel:+9779805315330">
+        <div>
+          <div class="contact-label">VOICE COMMS:</div>
+          <div class="contact-value">+977 9805315330</div>
+        </div>
+      </a>
+      <div class="contact-item" style="cursor: default;">
+        <div>
+          <div class="contact-label">PHYSICAL NODE:</div>
+          <div class="contact-value">Rajeev Nagar, Patna – 800024</div>
+        </div>
+      </div>
+    </div>
+    <div class="terminal-card contact-card reveal delay-2" data-title="transmit.exe">
+      <h3 style="color:#fff; margin-bottom:1rem;">Ready to transmit data?</h3>
+      <p style="color:var(--text-muted); margin-bottom:1.5rem;">Port is open for internships, team collaborations, and encrypted messages. Awaiting handshake.</p>
+      <a class="btn-primary" href="mailto:in.singhmayank@gmail.com" style="align-self: flex-start;">
+        SEND PACKET
+      </a>
+    </div>
+  </div>
+</section>]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'><data:content/></b:includable>
+  </b:widget>
+</b:section>
+
+<b:section class='ad-wrapper' id='ad-bottom' maxwidgets='1' showaddelement='yes'>
+  <b:widget id='HTML42' locked='false' title='Ad Slot (Bottom)' type='HTML' version='2' visible='true'>
+    <b:widget-settings><b:widget-setting name='content'/></b:widget-settings>
+    <b:includable id='main'><div class="ad-sponsor-block"><div class="ad-sponsor-label">[ INJECTED AD ]</div><data:content/></div></b:includable>
+  </b:widget>
+</b:section>
+
+<footer class='site-footer'>
+  <div class='footer-bottom'>
+    <div class='footer-left'>
+      <p>SYS_DATE: <script>document.write(new Date().getFullYear())</script>. ALL NODES SECURE.</p>
+    </div>
+    
+    <b:section class='footer-inline-links' id='footer-inline-links' maxwidgets='1' showaddelement='no'>
+      <b:widget id='HTML22' locked='false' title='Legal Links' type='HTML' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='content'><![CDATA[<div class="inline-legal-links">
+            <a href="/p/privacy-policy.html">PRIVACY.LOG</a>
+            <a href="/p/terms.html">TERMS.CFG</a>
+            <a href="/p/disclaimer.html">DISCLAIMER.TXT</a>
+          </div>]]></b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main'><data:content/></b:includable>
+      </b:widget>
+    </b:section>
+
+    <div class='footer-right'>
+      <p>ARCHITECT: <span style='color: #fff;'>Mayank</span></p>
+    </div>
+  </div>
+</footer>
+
+<script>
+//<![CDATA[
+  /* ── HTML5 CANVAS MATRIX RAIN ── */
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~'.split('');
+  const fontSize = 16;
+  let columns = canvas.width / fontSize;
+  let drops = [];
+  
+  for (let x = 0; x < columns; x++) { drops[x] = 1; }
+
+  // Check current theme for rain color
+  function getRainColor() {
+      if (document.body.getAttribute('data-theme') === 'breach') {
+          return '#ff003c'; // Red rain
+      }
+      return '#00ff41'; // Green rain
+  }
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = getRainColor();
+    ctx.font = fontSize + 'px "Share Tech Mono", monospace';
+    
+    for (let i = 0; i < drops.length; i++) {
+      const text = chars[Math.floor(Math.random() * chars.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+  setInterval(drawMatrix, 35);
+
+  /* ── BREACH (THEME) TOGGLE ── */
+  function toggleTheme() {
+    const body = document.body;
+    const current = body.getAttribute('data-theme');
+    body.setAttribute('data-theme', current === 'breach' ? '' : 'breach');
+    localStorage.setItem('theme', body.getAttribute('data-theme'));
+    
+    // Reset canvas to clear trailing colors instantly
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  
+  (function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'breach') document.body.setAttribute('data-theme', 'breach');
+  })();
+
+  /* ── MOBILE MENU ── */
+  function toggleMenu() {
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.toggle('active');
+  }
+
+  /* ── SCROLL REVEAL ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if(revealElements.length > 0) {
+      revealElements.forEach(el => observer.observe(el));
+  }
+  
+  /* ── CLEANUP LEFTOVER SPACES ── */
+  document.addEventListener("DOMContentLoaded", function() {
+    if (document.querySelector('.post-container')) {
+      const postBodies = document.querySelectorAll('.post-body');
+      postBodies.forEach(body => {
+        let node = body.firstChild;
+        while (node) {
+          let next = node.nextSibling;
+          if (node.nodeName === 'BR' || 
+             (node.nodeType === 3 && node.textContent.trim() === '') ||
+             (node.classList && node.classList.contains('separator')) ||
+             (node.nodeName === 'P' && node.innerHTML.trim() === '')) {
+            node.remove();
+          } else {
+            break;
+          }
+          node = next;
+        }
+      });
+    }
+  });
+//]]>
+</script>
+</body>
+</html>
