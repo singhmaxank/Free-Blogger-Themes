@@ -4,6 +4,8 @@ A curated collection of 7 free, highly interactive, and responsive Blogger templ
 
 They are completely free to use for personal portfolios, tech blogs, or commercial projects.
 
+---
+
 ## 🎨 The Collection
 
 ### 1. Clean UI Core
@@ -48,14 +50,18 @@ An elegant, smooth theme featuring a true live gradient background, falling data
 
 ![Space Grotesk Preview](screenshots/theme-space-ambient.png)
 
+---
+
 ## ⚙️ How to Install on Blogger
 
-1. Click on the theme file you want to use above and download the `.xml` file.
+1. Click on the theme folder you want to use above and download the `.xml` file.
 2. Log in to your **Blogger Dashboard**.
 3. Navigate to **Theme** on the left sidebar.
 4. Click the down arrow next to the **Customize** button and select **Restore**.
 5. Click **Upload** and select the `.xml` file you just downloaded.
 6. Refresh your blog and enjoy the new design!
+
+---
 
 ## 🛠️ Built With
 * Native Blogger XML
@@ -63,7 +69,12 @@ An elegant, smooth theme featuring a true live gradient background, falling data
 * Vanilla JavaScript (Interactive canvases, custom toggles, scroll reveals)
 * HTML5
 
+## 🤝 Connect with Me
+Want to see how these themes are built, or follow my journey in AI and cybersecurity? 
+* **YouTube:** [Subscribe to Badmosh Mamu](https://www.youtube.com/@badmoshmamu)
+* **Instagram:** [Follow @singhmaxank](https://instagram.com/singhmaxank)
+
 ## 📜 License
 This project is open-source and available under the MIT License. Feel free to modify, distribute, and use these themes. If you use them, a shoutout or backlink is always appreciated!
 
-**Designed by [Mayank Raj](https://github.com/singhmaxank)**
+**Designed by Mayank Raj**
